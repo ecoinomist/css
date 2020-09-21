@@ -1,0 +1,102 @@
+@import "_mixins";
+
+@angle-size: size(220);
+@angle-dot-size: size(30); // use even number to achieve pixel perfect rendering
+@angle-picker-padding: size(10);
+@angle-diameter: @angle-size - @angle-dot-size - @angle-picker-padding * 2;
+@angle-pointer-color: @color-primary;
+@angle-label-color: @color-text-inverse;
+@angle-border-size: @border-size-thick;
+@angle-border: @angle-border-size @border-style @color-neutral;
+
+.rotation__angle {
+  .circle(@angle-diameter + @angle-dot-size + @angle-picker-padding * 2);
+  &:extend(.flex--col);
+  &:extend(.bg-neutral);
+}
+
+.rotation__dots {
+  .circle(@angle-diameter);
+  &:extend(.position-center);
+  &:extend(.bg-grey);
+
+  &:before {
+    .circle(@angle-diameter + @angle-border-size);
+    &:extend(.position-center);
+    &:extend(.object);
+    box-sizing: border-box;
+    border: @angle-border;
+  }
+}
+
+.rotation__line {
+  @height: @angle-size / 4;
+  @heightHalf: @height / 2;
+  @widthHalf: @angle-diameter / 2;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 50%;
+  height: @height;
+  margin-top: -@heightHalf;
+  margin-bottom: -@heightHalf; // offset bottom position to avoid creating scrollbar
+  transform-origin: left center;
+  transition: none !important;
+
+  &.active {
+    //@pickerSize: @angle-dot-size * 2 / 5;
+    @offsetPosition: @heightHalf; // + @pickerSize / 2;
+
+    &:before, &:after {
+      &:extend(.object);
+      position: absolute;
+      margin-left: -@heightHalf;
+      border: @heightHalf solid transparent;
+      border-right-width: @widthHalf;
+    }
+
+    &:before {
+      border-bottom-color: @angle-pointer-color;
+      top: -@offsetPosition;
+    }
+
+    &:after {
+      border-top-color: @angle-pointer-color;
+      top: @offsetPosition;
+    }
+
+    //.rotation__rod {
+    //  &:extend(.object);
+    //  &:extend(.position-center);
+    //  width: 100%;
+    //  height: @pickerSize;
+    //  background: @angle-pointer-color;
+    //}
+
+    .rotation__dot {
+      background: @angle-pointer-color;
+      transform: scale(0.4);
+    }
+  }
+}
+
+.rotation__dot {
+  @offset: -@angle-dot-size / 2;
+  .circle(@angle-dot-size);
+  &:extend(.position-right);
+  &:extend(.bg-neutral);
+  top: 50%;
+  margin-top: @offset;
+  margin-right: @offset;
+  margin-bottom: @offset;
+  border: @angle-border;
+  z-index: 1;
+}
+
+.rotation__label {
+  &:extend(.position-center);
+  .circle(@angle-diameter / 2);
+  background: @angle-pointer-color;
+  color: @angle-label-color;
+  font-size: round(px(@angle-diameter / 6));
+}

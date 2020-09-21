@@ -1,0 +1,110 @@
+@import "_mixins";
+@import "input";
+
+@sliderR-handle-size: size(20);
+@sliderR-track-thickness: size(3);
+@sliderR-handle-color: @color-primary;
+@sliderR-track-color: @color-primary-light;
+@sliderR-track-margin: @sliderR-track-thickness * 2;
+@sliderR-mark-size: size(5);
+@sliderR-mark-thickness: size(1);
+@sliderR-mark-label-size: @size-smaller;
+@sliderR-value-padding-v: @input-padding-v-value + @border-size;
+@sliderR-drag-padding-offset: @padding-smaller; // additional padding for easier drag experience
+@sliderR-drag-padding-top: @sliderR-handle-size - @sliderR-track-margin - @sliderR-track-thickness + @sliderR-drag-padding-offset;
+@sliderR-drag-padding-bottom: @sliderR-mark-label-size + @sliderR-track-margin;
+
+.slider__range {
+  &.vertical {
+    transform: rotate(-90deg);
+  }
+}
+
+.slider__range__labels {
+  margin-bottom: -@sliderR-drag-padding-offset;
+}
+
+.slider__range__drag {
+  &:extend(.flex--col);
+  padding-top: @sliderR-drag-padding-top;
+  padding-bottom: @sliderR-drag-padding-bottom;
+  //background: bisque; // for debugging
+
+  > * {
+    pointer-events: none;
+  }
+}
+
+.slider__range__track, .slider__range__mark {
+  &:extend(.round);
+  background: @sliderR-track-color;
+}
+
+.slider__range__track {
+  &:extend(.full-width);
+  margin-bottom: @sliderR-track-margin;
+  height: @sliderR-track-thickness;
+}
+
+.slider__range__mark {
+  &:extend(.object);
+  width: @sliderR-mark-thickness;
+  height: @sliderR-mark-size;
+}
+
+.slider__range__mark__label {
+  &:extend(.position-absolute);
+  &:extend(.no-wrap);
+  font-size: @sliderR-mark-label-size;
+  margin-top: @sliderR-mark-size + @sliderR-track-margin;
+}
+
+.slider__range__marks {
+  // Nest this inside to avoid having to reference `padding` props
+  .slider__range__handles {
+    @offset: @sliderR-mark-thickness; // offset for the first and last marks
+    &:extend(.position-absolute);
+    &:extend(.full-height);
+    .margin-h(@offset / 2);
+    width: calc(100% - @offset);
+  }
+}
+
+.slider__range__handle {
+  &:extend(.position-absolute);
+  pointer-events: none;
+  bottom: @sliderR-track-thickness;
+  color: @sliderR-handle-color;
+  transform: translateX(-50%);
+
+  &:before {
+    font-size: @sliderR-handle-size;
+  }
+}
+
+.slider__range__label {
+  &:extend(.padding-right-smallest);
+  &:extend(.text.truncate);
+}
+
+.slider__range__value {
+  &:extend(.text-align-right);
+  &:extend(.no-wrap);
+
+  &.text {
+    &:extend(.link-padding all);
+    .padding-v(@sliderR-value-padding-v);
+    line-height: normal;
+  }
+}
+
+input.slider__range__value {
+  border-top-right-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+
+  + .select select {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-left: none;
+  }
+}

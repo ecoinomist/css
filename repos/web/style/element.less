@@ -1,0 +1,53 @@
+@import "_mixins";
+
+.lang-selection {
+  .input--dropdown__option {
+    .app__image {
+      width: @size-base;
+    }
+  }
+}
+
+.object {
+  .object(flex);
+}
+
+// SWATCHES --------------------------------------------------------------------
+.swatch {
+  display: inline-flex;
+}
+
+.color__swatch {
+  @scaleSize: 2;
+  .square(@size-icon * @scaleSize);
+  &:extend(.swatch);
+  &:extend(.radius-small);
+
+  &.small {
+    .square(@size-icon-small);
+  }
+
+  &.large {
+    .square(@size-icon-large);
+  }
+}
+
+.material__swatch {
+  &:extend(.swatch);
+  &:extend(.radius-small);
+  border-color: @color-black;
+  overflow: hidden;
+
+  canvas {
+    //&:extend(.position-center);
+    //background: rgba(200, 50, 50, 0.5);
+    // icon does not work as canvas background, even with pseudo element
+  }
+}
+
+.texture__swatch {
+  @scaleSize: 10; // 4.5; // fit 3 textures in min 320 width (90px)
+  .square(@size-icon * @scaleSize);
+  &:extend(.material__swatch);
+  &:extend(.bg-image);
+}

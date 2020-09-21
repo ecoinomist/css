@@ -1,0 +1,13 @@
+@import "_mixins";
+
+label {
+  &:extend(.uppercase all);
+
+  .json-tree & {
+    text-transform: initial;
+  }
+}
+
+.app__tag {
+  &:extend(.input-tag all);
+}

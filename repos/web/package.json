@@ -1,0 +1,36 @@
+{
+  "name": "web",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev & yarn css && yarn style:watch",
+    "build": "yarn build:css && next build",
+    "build:css": "NODE_ENV=production yarn css",
+    "start": "next start",
+    "restart": "yarn build && yarn start",
+    "style": "node ../../node_modules/less-watcher-compiler --gulpfile ../../node_modules/less-watcher-compiler/gulpfile.js --cwd ./",
+    "style:watch": "yarn style --sourcemap",
+    "css": "yarn style symlink && yarn style css"
+  },
+  "dependencies": {
+    "@zeit/next-css": "^1.0.1",
+    "chalk": "^4.1.0",
+    "core": "*",
+    "next": "9.3.5",
+    "next-redux-wrapper": "^6.0.2"
+  },
+  "peerDependencies": {
+    "modules-pack": "x",
+    "react": "16.13.1",
+    "react-dom": "16.13.1",
+    "react-ui-pack": "x",
+    "utils-pack": "x"
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-decorators": "^7.10.1",
+    "less-watcher-compiler": "^0.1.0",
+    "next-compose-plugins": "^2.2.0",
+    "next-transpile-modules": "^3.3.0",
+    "semantic-ui-less": "^2.4.1"
+  }
+}

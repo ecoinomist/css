@@ -1,0 +1,62 @@
+@import "_mixins";
+
+@tabs-active-border-size: size(4);
+@tabs-active-border-color: @color-primary-light;
+@tabs-active-color: @color-primary-light;
+
+.tabs {
+  &:extend(.max-width all); // for ScrollView to work
+  &:extend(.max-height all); // for ScrollView to work
+}
+
+.tabs__content {
+  &:extend(.padding-top all);
+}
+
+.tabs__item {
+  &:extend(.padding-h);
+  &:extend(.padding-v-small);
+  &:extend(.border-bottom all);
+  line-height: @line-height-base;
+
+  @{select-interaction} {
+    &:extend(.bg-grey-lighter);
+  }
+
+  &.active {
+    &:extend(.text.bold);
+    border-color: transparent;
+    color: @tabs-active-color;
+
+    &:after {
+      .tabs:not(.buttoned) & {
+        &:extend(.position-bottom); // underline covering padding
+        //&:extend(.margin-top-smaller); // underline not covering padding
+        .object();
+        width: 100%;
+        height: @tabs-active-border-size;
+        background: @tabs-active-border-color;
+      }
+    }
+
+    .tabs.buttoned & {
+      &:extend(.border);
+      &:extend(.margin-h-small);
+      &:extend(.padding-v-small);
+      border-color: @tabs-active-border-color;
+      border-style: dashed;
+    }
+  }
+
+  .tabs.buttoned & {
+    &:extend(.round);
+  }
+}
+
+.tabs-content-grey {
+  &,
+  .input--wrapper.float .ui.selection.dropdown + .input__label,
+  .input--wrapper.float .input label {
+    &:extend(.bg-grey-light all);
+  }
+}
