@@ -533,7 +533,7 @@ div.select {
     &:not(.large) {
       @padding: @size-icon + @input-padding-h-value * 1.5;
       @offset: @input-padding-h-value;
-      @margin: @size-icon + @offset + @border-size;
+      @margin: @size-icon + @offset;
       .iconPosition(@padding; @offset; @margin;)
     }
 
@@ -541,15 +541,19 @@ div.select {
       @ratio: @input-font-size-large / @input-font-size;
       @padding: @input-font-size-large-icon + @input-padding-h-value * 1.5 * @ratio;
       @offset: size(round(px(@input-padding-h-value * @ratio)));
-      @margin: @input-font-size-large-icon + @offset + @border-size;
+      @margin: @input-font-size-large-icon + @offset;
       .iconPosition(@padding; @offset; @margin;);
     }
 
     .iconPosition(@padding; @offset; @margin;) {
-      @icon-padding: @input-padding-v-value;
+      @iconPadding: @input-padding-v-value;
+      @iconOffsetBefore: @margin + @iconPadding;
+      @iconOffsetAfter: @offset - @iconPadding;
+
       @{select-icon} {
-        padding: @icon-padding;
+        padding: @iconPadding;
       }
+
       &:not(.lefty) {
         .input__unit,
         input, select, textarea {
@@ -557,10 +561,11 @@ div.select {
         }
 
         @{select-icon} {
-          margin-left: -(@margin + @icon-padding);
-          margin-right: @offset - @icon-padding;
+          margin-left: -@iconOffsetBefore;
+          margin-right: @iconOffsetAfter;
         }
       }
+
       &.lefty {
         .input__unit,
         input, select, textarea {
@@ -573,8 +578,8 @@ div.select {
         }
 
         @{select-icon} {
-          margin-right: -(@margin + @icon-padding);
-          margin-left: @offset - @icon-padding;
+          margin-right: -@iconOffsetBefore;
+          margin-left: @iconOffsetAfter;
         }
       }
     }
