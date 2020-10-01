@@ -207,3 +207,15 @@
     }
   }
 }
+
+// Fix use case when <Dropdown search /> - without `multiple`, no default text collapses menu
+.ui.search.dropdown > input.search:not([value=""]) {
+  position: static;
+  padding: 0;
+  max-width: 100%;
+  transition: none;
+
+  + .filtered.text {
+    display: none;
+  }
+}
