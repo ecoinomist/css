@@ -8,7 +8,7 @@
     "modules-pack": "^0.4.0",
     "react": "16.13.1",
     "react-dom": "16.13.1",
-    "react-ui-pack": "^0.4.9",
+    "react-ui-pack": "^0.5.0",
     "utils-pack": "^0.2.18"
   },
   "peerDependencies": {
