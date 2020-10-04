@@ -159,7 +159,7 @@
       }
 
       &.done:not(.passed):before {
-        &:extend(.fade all);
+        .fadeOnBlur(); // do not extend here to avoid bug with .fade
       }
     }
   }

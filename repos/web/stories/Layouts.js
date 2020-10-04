@@ -74,16 +74,16 @@ export default class Layouts extends Component {
         </Row>
 
         {/* Headers */}
-        <h1>H1 Header with <Icon name='search'/>
+        <h1 className='fade'>H1 Header with <Icon name='search'/>
           <small>small text inside</small>
         </h1>
-        <h2>H2 Header with <Icon name='search'/>
+        <h2 className='fade--quarter'>H2 Header with <Icon name='search'/>
           <small>small text inside</small>
         </h2>
         <h3>H3 Header with <Icon name='search'/>
           <small>small text inside</small>
         </h3>
-        <h4>H4 Header with <Icon name='search'/>
+        <h4 className='faded'>H4 Header with <Icon name='search'/>
           <small>small text inside</small>
         </h4>
         <h5>H5 Header with <Icon name='search'/>
