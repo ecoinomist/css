@@ -20,6 +20,9 @@
 @input-label-line-height: 1.3;
 @input-label-size: size(round(@input-label-size-ratio * px(@input-font-size))); // offset space for Label to sit at the top
 @input-label-size-offset: @input-label-size + @input-padding-v-value + (@input-label-size-default-ratio - @input-label-size-ratio) * @input-label-line-height * @input-font-size;
+// Color swatch
+@input-swatch-width: size(40);
+@input-swatch-height: size(33);
 
 .input-done {
   border-color: fade(@input-color, 35%);
@@ -88,6 +91,21 @@ input {
 
     &::-webkit-calendar-picker-indicator {
       display: none;
+    }
+  }
+
+  &[type="color"] {
+    &:extend(.no-padding);
+    width: @input-swatch-width !important;
+    height: @input-swatch-height !important;
+
+    &:before {
+      &:extend(.position-center);
+      &:extend(.object);
+      width: calc(100% - @border-size * 2 - 2px); // offset for border and focus outline
+      height: calc(100% - @border-size * 2 - 2px);
+      border-radius: inherit;
+      background-color: inherit; // use color set by Input on change
     }
   }
 
