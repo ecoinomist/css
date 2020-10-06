@@ -60,7 +60,7 @@
     .icon();
 
     &:before {
-      content: @icon-dropdown;
+      content: @icon-dropdown-chevron;
     }
   }
 
@@ -75,8 +75,9 @@
 
   // Buttons for Multiple Search Selection
   > .label {
-    white-space: nowrap;;
     .outline();
+    display: inline-flex;
+    white-space: nowrap;;
     font-weight: normal;
     color: @color-text;
     background-color: @color-bg;
@@ -203,6 +204,21 @@
         &.default {
           color: @color-red-light !important;
         }
+      }
+    }
+  }
+}
+
+.ui.multiple.dropdown {
+  // Selected tags
+  > .label {
+    padding-right: @padding-smaller; // quick fix
+
+    > i.icon.delete {
+      .icon();
+
+      &:before {
+        content: @icon-dropdown-delete;
       }
     }
   }

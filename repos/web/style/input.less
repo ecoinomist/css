@@ -165,6 +165,10 @@ input, select, textarea {
     + label {
       cursor: default;
     }
+
+    > i.icon.dropdown {
+      opacity: 0.4;
+    }
   }
 
   &.readonly {
@@ -296,7 +300,7 @@ input, select, textarea {
   // Default State
   &:not(.active) {
     > .text.default {
-      .labeled & {
+      .labeled.float & {
         opacity: 0;
       }
     }
@@ -355,8 +359,27 @@ input, select, textarea {
   }
 
   &.loading > {
-    @{select-icon} {
-      padding: size(17) !important; // quick fix
+    i.icon.dropdown {
+      &:extend(.spin all);
+      .scalePadding(@size: @input-font-size, @top: @input-padding-v, @left: @input-padding-h) !important;
+      height: initial !important;
+
+      // Remove Semantic UI styling
+      &:before {
+        content: @icon-dropdown-spinner;
+        border: none;
+        position: initial;
+        top: initial;
+        left: initial;
+        margin: initial;
+        width: initial;
+        height: initial;
+        border-radius: initial;
+      }
+
+      &:after {
+        display: none;
+      }
     }
   }
 
@@ -371,8 +394,10 @@ input, select, textarea {
   }
 
   i.icon.dropdown {
-    &:extend(.position-top-right all);
+    &:extend(.position-absolute);
     &:extend(.no-margin all);
+    top: @border-size;
+    right: @border-size;
     opacity: 1;
     font-size: @size-icon;
     color: @input-color;
@@ -399,6 +424,11 @@ input, select, textarea {
   input.search { // input
     &:extend(.no-margin all);
     line-height: inherit !important;
+  }
+
+  // Align input placeholder with cursor when start typing inside single search dropdown
+  &.search:not(.multiple) > input.search[value=""] {
+    padding: inherit;
   }
 
   ~ .field-help {
