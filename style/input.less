@@ -125,7 +125,7 @@ input, select, textarea {
   .font(@size: @input-font-size; @lineHeight: normal; @weight: @font-weight);
   .scalePadding(@size: @input-font-size, @top: @input-padding-v, @left: @input-padding-h);
   display: inline-flex;
-  //opacity: 0.8;
+  width: 100%; // this is needed for input to dynamically adjust to available width
   background-color: @input-background-color;
   border: @border @input-color;
   border-radius: @radius-base;
@@ -720,7 +720,6 @@ div.select {
   }
 
   input, select, textarea {
-    width: 100%;
     height: auto;
     font-size: inherit;
 
