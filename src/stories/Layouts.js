@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import { FILE } from 'react-ui-pack'
-import Icon from 'react-ui-pack/src/Icon'
-import Loading from 'react-ui-pack/src/Loading'
-import Row from 'react-ui-pack/src/Row'
-import Spinner from 'react-ui-pack/src/Spinner'
-import Square, { asSquare } from 'react-ui-pack/src/Square'
-import View from 'react-ui-pack/src/View'
+import Icon from 'react-ui-pack/Icon'
+import Loading from 'react-ui-pack/Loading'
+import Row from 'react-ui-pack/Row'
+import Spinner from 'react-ui-pack/Spinner'
+import Square, { asSquare } from 'react-ui-pack/Square'
+import View from 'react-ui-pack/View'
 
 Square.View = asSquare(View)
 Square.Row = asSquare(Row)

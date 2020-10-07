@@ -1,9 +1,11 @@
-// import coreModules from 'core'
-import popup from 'modules-pack/src/popup'
-import redux, { createStore } from 'modules-pack/src/redux'
-import saga from 'modules-pack/src/saga'
+// import formRedux from 'modules-pack/formRedux'
+import form from 'modules-pack/form'
+import popup from 'modules-pack/popup'
+import redux, { createStore } from 'modules-pack/redux'
+import saga from 'modules-pack/saga'
 import { createWrapper } from 'next-redux-wrapper'
 import { __DEV__, Active } from 'utils-pack'
+import './testTranslation'
 
 // =============================================================================
 // STORE CREATION
@@ -12,7 +14,8 @@ import { __DEV__, Active } from 'utils-pack'
 Active.store = createStore([
   redux,
   saga,
-  popup
+  popup,
+  form,
 ].concat(
   // coreModules
 ))

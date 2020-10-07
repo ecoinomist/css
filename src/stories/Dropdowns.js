@@ -1,8 +1,8 @@
-import { withForm } from 'modules-pack/src/form'
+import { withForm } from 'modules-pack/form'
 import React, { Component } from 'react'
-import Dropdown from 'react-ui-pack/src/Dropdown'
-import Row from 'react-ui-pack/src/Row'
-import View from 'react-ui-pack/src/View'
+import Dropdown from 'react-ui-pack/Dropdown'
+import Row from 'react-ui-pack/Row'
+import View from 'react-ui-pack/View'
 
 /**
  * Form Inputs
@@ -50,6 +50,7 @@ export default class Dropdowns extends Component {
             <Dropdown float label='readonly' readonly value={options[0]} options={options}/>
             <Dropdown placeholder='Readonly placeholder' readonly options={options}/>
             <Dropdown label='readonly' placeholder='Enter...' readonly value={options[0]} options={options}/>
+            {/* todo: option removed */}
           </View>
 
           {/* Redux Form Inputs */}

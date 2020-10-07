@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import React, { PureComponent } from 'react'
-import View from 'react-ui-pack/src/View'
+import View from 'react-ui-pack/View'
 import { logRender } from 'utils-pack'
 
 import Content from './testerContent'

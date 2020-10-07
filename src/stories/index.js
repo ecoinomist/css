@@ -1,8 +1,8 @@
 import Head from 'next/head'
 import React, { Component } from 'react'
-import Button from 'react-ui-pack/src/Button'
-import Row from 'react-ui-pack/src/Row'
-import ScrollView from 'react-ui-pack/src/ScrollView'
+import Button from 'react-ui-pack/Button'
+import Row from 'react-ui-pack/Row'
+import ScrollView from 'react-ui-pack/ScrollView'
 import { logRender } from 'utils-pack'
 import Buttons from './Buttons'
 import Charts from './Charts'
@@ -13,7 +13,7 @@ import Layouts from './Layouts'
 @logRender
 export default class Theme extends Component {
   state = {
-    activeIndex: 0,
+    activeIndex: 3,
     items: [
       {name: 'Layouts', content: Layouts},
       {name: 'Buttons', content: Buttons},

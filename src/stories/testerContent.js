@@ -1,7 +1,7 @@
 import React from 'react'
-import Row from 'react-ui-pack/src/Row'
-import Text from 'react-ui-pack/src/Text'
-import View from 'react-ui-pack/src/View'
+import Row from 'react-ui-pack/Row'
+import Text from 'react-ui-pack/Text'
+import View from 'react-ui-pack/View'
 
 export default function () {
   return (<>

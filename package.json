@@ -3,13 +3,13 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "dev": "NODE_ENV=development yarn cache clean && yarn css && ../web/node_modules/.bin/next dev & yarn style:watch",
+    "dev": "NODE_ENV=development yarn cache clean && yarn css && next dev & yarn style:watch",
     "build": "NODE_ENV=production yarn css && ../web/node_modules/.bin/next build",
     "start": "../web/node_modules/.bin/next start",
     "restart": "yarn build && yarn start",
     "style": "node ../less-watcher-compiler --gulpfile ../less-watcher-compiler/gulpfile.js --cwd ./",
-    "style:watch": "yarn ../web/style --sourcemap",
-    "css": "yarn ../web/style symlink && yarn style css"
+    "style:watch": "yarn style --sourcemap",
+    "css": "yarn style symlink && yarn style css"
   },
   "peerDependencies": {
     "less-watcher-compiler": "0.1.x"

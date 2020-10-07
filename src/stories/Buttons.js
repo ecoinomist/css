@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
 import { cn } from 'react-ui-pack'
-import Button from 'react-ui-pack/src/Button'
-import Icon from 'react-ui-pack/src/Icon'
-import Row from 'react-ui-pack/src/Row'
-import View from 'react-ui-pack/src/View'
+import React, { Component } from 'react'
+import Button from 'react-ui-pack/Button'
+import Icon from 'react-ui-pack/Icon'
+import Row from 'react-ui-pack/Row'
+import View from 'react-ui-pack/View'
 
 /**
  * Button States
