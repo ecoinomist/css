@@ -1,9 +1,25 @@
 {
   "name": "css-less",
   "version": "0.0.1",
-  "private": true,
+  "description": "Modular CSS Boilerplate - cross-platform and UI framework agnostic",
+  "license": "MIT",
+  "main": "_all.less",
+  "homepage": "https://github.com/ecoinomist/css",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ecoinomist/css.git"
+  },
+  "private": false,
+  "sideEffects": false,
+  "keywords": [
+    "ui",
+    "css",
+    "less"
+  ],
   "scripts": {
     "dev": "NODE_ENV=development yarn cache clean && yarn css && next dev & yarn style:watch",
+    "push": "cp {README.md,LICENSE,package.json} style/ && cd style && yarn publish && cd ../ && yarn delete style/{README.md,LICENSE,package.json}",
+    "delete": "../../node_modules/rimraf/bin.js",
     "build": "NODE_ENV=production yarn css && ../web/node_modules/.bin/next build",
     "start": "../web/node_modules/.bin/next start",
     "restart": "yarn build && yarn start",
