@@ -1,5 +1,6 @@
 @import "_mixins";
 
+// @Note: custom opacity can be set to parent wrapper
 .appear-on-hover {
   &:extend(.disappear-slow all);
   z-index: 1;
@@ -16,8 +17,15 @@
 
 .link-padding {
   &:focus {
-    .padding-h(@padding-smallest);
-    .margin-h(-@padding-smallest);
+    .padding(@padding-smaller);
+    .margin(-@padding-smaller);
+  }
+}
+
+.link-padding-h {
+  &:focus {
+    .padding-h(@padding-smaller);
+    .margin-h(-@padding-smaller);
   }
 }
 
@@ -63,6 +71,14 @@
 
 .border-right {
   border-right: @border-base !important;
+}
+
+.no-border {
+  border: none !important;
+}
+
+.no-border-left {
+  border-left: none !important;
 }
 
 .no-border-right {

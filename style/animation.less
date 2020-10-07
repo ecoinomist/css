@@ -48,7 +48,7 @@
     opacity: 0;
   }
   to {
-    opacity: 1;
+    opacity: inherit;
   }
 }
 
@@ -56,10 +56,14 @@
   animation: appear @speed-base forwards;
 }
 
+.appear-slow {
+  animation: appear @speed-base*2 forwards;
+}
+
 /* Disappear visually (will be accessible with keyboard) */
 @keyframes disappear {
   from {
-    opacity: 1;
+    opacity: inherit;
   }
   to {
     opacity: 0;
