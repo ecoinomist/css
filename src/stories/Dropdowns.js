@@ -35,6 +35,15 @@ export default class Dropdowns extends Component {
               {text: '[2]', value: '2'},
             ]}/>
             <Dropdown label='Loading...' placeholder='Enter...' loading options={options}/>
+
+            {/* placeholder is used to control width in compact mode because label is floated */}
+            <Row className='bottom justify'>
+              <Dropdown compact label="Compact" placeholder="Search..." search options={options}/>
+              <Dropdown compact float label="Compact" placeholder="Select..." options={options}/>
+            </Row>
+            <Row>
+              <Dropdown compact placeholder="Compact inside Row" search options={options}/>
+            </Row>
           </View>
 
           {/* Raw Inputs */}
@@ -50,7 +59,11 @@ export default class Dropdowns extends Component {
             <Dropdown float label='readonly' readonly value={options[0]} options={options}/>
             <Dropdown placeholder='Readonly placeholder' readonly options={options}/>
             <Dropdown label='readonly' placeholder='Enter...' readonly value={options[0]} options={options}/>
-            {/* todo: option removed */}
+
+            <Dropdown float label='Option removed' value={'none'} options={options}/>
+            <Dropdown float label='Option removed' placeholder='multiple' multiple value={['none']} options={options}/>
+            <Dropdown label='Option removed' placeholder='search multiple' search multiple value={['none']}
+                      options={options}/>
           </View>
 
           {/* Redux Form Inputs */}

@@ -407,7 +407,9 @@ input, select, textarea {
     }
   }
 
-  > .text.default { // placeholder
+  // placeholder
+  > .text.default,
+  > .text.divider { // shown when value is not in Dropdown options
     // placeholder is rendered as absolutely positioned element when input has value inside Search Dropdown
     &:extend(.no-margin all);
     line-height: inherit;
