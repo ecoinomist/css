@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import React from 'react'
 import { Active } from 'utils-pack'
-import { withStore } from '../src/store'
+import { withStore } from '../store'
 
 // @Note: must use `typeof window === 'undefined'` for next.js to remove backend code from client
 // @see: https://flaviocopes.com/nextjs-server-client-code/

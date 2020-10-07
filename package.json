@@ -1,33 +1,28 @@
 {
-  "name": "next.app",
-  "version": "0.0.0",
+  "name": "css-less",
+  "version": "0.0.1",
   "private": true,
-  "workspaces": {
-    "packages": [
-      "repos/*"
-    ],
-    "nohoist": []
-  },
   "scripts": {
-    "dev": "yarn workspace web dev",
-    "start": "concurrently \"yarn workspace web start\"",
-    "build": "yarn workspace web build",
-    "scan": "./node_modules/.bin/madge --circular repos --exclude 'node_modules/'",
-    "test": "jest",
-    "reset": "yarn clear && yarn cache clean && yarn",
-    "clear": "yarn delete yarn.lock node_modules repos/core/node_modules repos/server/node_modules repos/web/node_modules",
-    "delete": "./node_modules/rimraf/bin.js",
-    "symlink": "node ./scripts/symlink.js"
+    "dev": "NODE_ENV=development yarn cache clean && yarn css && ../web/node_modules/.bin/next dev & yarn style:watch",
+    "build": "NODE_ENV=production yarn css && ../web/node_modules/.bin/next build",
+    "start": "../web/node_modules/.bin/next start",
+    "restart": "yarn build && yarn start",
+    "style": "node ../less-watcher-compiler --gulpfile ../less-watcher-compiler/gulpfile.js --cwd ./",
+    "style:watch": "yarn ../web/style --sourcemap",
+    "css": "yarn ../web/style symlink && yarn style css"
+  },
+  "peerDependencies": {
+    "less-watcher-compiler": "0.1.x"
   },
   "devDependencies": {
-    "@testing-library/jest-dom": "^5.11.0",
-    "@testing-library/react": "^10.4.3",
-    "babel-jest": "^26.1.0",
-    "concurrently": "^5.2.0",
-    "identity-obj-proxy": "^3.0.0",
-    "jest": "^26.1.0",
-    "madge": "^3.9.2",
-    "react-test-renderer": "^16.13.1",
-    "rimraf": "^3.0.2"
+    "@zeit/next-css": "^1.0.1",
+    "chalk": "^4.1.0",
+    "next": "9.3.5",
+    "next-redux-wrapper": "^6.0.2",
+    "react": "16.13.1",
+    "react-dom": "16.13.1",
+    "next-compose-plugins": "^2.2.0",
+    "next-transpile-modules": "^3.3.0",
+    "semantic-ui-less": "^2.4.1"
   }
 }

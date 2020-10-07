@@ -1,8 +1,8 @@
-import { withForm } from 'modules-pack/form'
+import { withForm } from 'modules-pack/src/form'
 import React, { Component } from 'react'
-import Dropdown from 'react-ui-pack/Dropdown'
-import Row from 'react-ui-pack/Row'
-import View from 'react-ui-pack/View'
+import Dropdown from 'react-ui-pack/src/Dropdown'
+import Row from 'react-ui-pack/src/Row'
+import View from 'react-ui-pack/src/View'
 
 /**
  * Form Inputs
