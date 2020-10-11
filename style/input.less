@@ -3,6 +3,7 @@
 @input-colors: primary;
 @input-color: @color-black; // label and border color
 @input-color-inverse: @color-text-grey; // inverted label and border color
+@input-border: @border @input-color;
 @input-background-color: transparent;
 @input-background-color-interaction: transparent;
 @input-padding-v: 0.4;
@@ -131,7 +132,7 @@ input, select, textarea {
   display: inline-flex;
   width: 100%; // this is needed for input to dynamically adjust to available width
   background-color: @input-background-color;
-  border: @border @input-color;
+  border: @input-border;
   border-radius: @radius-base;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -684,6 +685,10 @@ div.select {
   &:extend(.button.circle.small all);
   &:extend(.appear-on-hover all);
   background-color: @color-white !important;
+
+  .inverted & {
+    background-color: @color-black !important;
+  }
 }
 
 /* Hidden Input Value Text to display Unit */

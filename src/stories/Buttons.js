@@ -1,5 +1,5 @@
-import { cn } from 'react-ui-pack'
 import React, { Component } from 'react'
+import { cn } from 'react-ui-pack'
 import Button from 'react-ui-pack/Button'
 import Icon from 'react-ui-pack/Icon'
 import Row from 'react-ui-pack/Row'
@@ -32,25 +32,36 @@ export default class Buttons extends Component {
     </Row>
   </View>)
 
+  renderGroups = ({className} = {}) => (
+    <Row className={cn('full-width center wrap bg-neutral', className)}>
+      <View className='margin'>
+        {this.renderButtonGroups({className: 'primary'})}
+        {this.renderButtonGroups({className: 'primary round'})}
+        {this.renderButtonGroups({className: 'primary', circle: true, children: <Icon name='heart'/>})}
+      </View>
+      <View className='margin'>
+        {this.renderButtonGroups({className: 'secondary'})}
+        {this.renderButtonGroups({className: 'secondary round'})}
+        {this.renderButtonGroups({className: 'secondary', circle: true, children: <Icon name='heart'/>})}
+      </View>
+      <View className='margin'>
+        {this.renderButtonGroups({name: 'Default'})}
+        {this.renderButtonGroups({name: 'Default', className: 'round'})}
+        {this.renderButtonGroups({name: 'Default', circle: true, children: <Icon name='heart'/>})}
+      </View>
+      <View className='margin'>
+        {this.renderButtonGroups({className: 'transparent'})}
+        {this.renderButtonGroups({className: 'transparent round'})}
+        {this.renderButtonGroups({className: 'transparent', circle: true, children: <Icon name='heart'/>})}
+      </View>
+    </Row>
+  )
+
   render () {
-    return (
-      <Row className='full-width center wrap'>
-        <View className='margin'>
-          {this.renderButtonGroups({className: 'primary'})}
-          {this.renderButtonGroups({className: 'primary round'})}
-          {this.renderButtonGroups({className: 'primary', circle: true, children: <Icon name='heart'/>})}
-        </View>
-        <View className='margin'>
-          {this.renderButtonGroups({className: 'secondary'})}
-          {this.renderButtonGroups({className: 'secondary round'})}
-          {this.renderButtonGroups({className: 'secondary', circle: true, children: <Icon name='heart'/>})}
-        </View>
-        <View className='margin'>
-          {this.renderButtonGroups({name: 'Default'})}
-          {this.renderButtonGroups({name: 'Default', className: 'round'})}
-          {this.renderButtonGroups({name: 'Default', circle: true, children: <Icon name='heart'/>})}
-        </View>
-      </Row>
+    return (<>
+        {this.renderGroups()}
+        {this.renderGroups({className: 'inverted'})}
+      </>
     )
   }
 }
