@@ -13,7 +13,7 @@ import Layouts from './Layouts'
 @logRender
 export default class Theme extends Component {
   state = {
-    activeIndex: 3,
+    activeIndex: 4,
     items: [
       {name: 'Layouts', content: Layouts},
       {name: 'Buttons', content: Buttons},

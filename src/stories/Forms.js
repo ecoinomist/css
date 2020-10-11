@@ -50,6 +50,8 @@ export default class Forms extends Component {
                 <InputField name='check' type='checkbox' label='checkbox' onChange={console.warn}/>
                 <InputField name='choice' type='radio' label='radio' onChange={console.warn}/>
               </Row>
+              <InputField name='color' type='color' label='Color Picker'/>
+              <Input type='color' label='Color Delete' onRemove={console.warn}/>
             </form>
             <form className='app__form max-width-290 padding-h-small'>
               <InputField float name='url' type='url' placeholder='https://example.com' icon='chain' validate={url}/>

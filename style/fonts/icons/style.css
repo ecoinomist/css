@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'icons';
-  src:  url('fonts/icons.eot?u2tq62');
-  src:  url('fonts/icons.eot?u2tq62#iefix') format('embedded-opentype'),
-    url('fonts/icons.ttf?u2tq62') format('truetype'),
-    url('fonts/icons.woff?u2tq62') format('woff'),
-    url('fonts/icons.svg?u2tq62#icons') format('svg');
+  src:  url('fonts/icons.eot?6rjf8u');
+  src:  url('fonts/icons.eot?6rjf8u#iefix') format('embedded-opentype'),
+    url('fonts/icons.ttf?6rjf8u') format('truetype'),
+    url('fonts/icons.woff?6rjf8u') format('woff'),
+    url('fonts/icons.svg?6rjf8u#icons') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -25,11 +25,53 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-facebook:before {
+  content: "\e913";
+}
+.icon-instagram:before {
+  content: "\ea92";
+}
+.icon-whatsapp:before {
+  content: "\eef2";
+}
+.icon-vk:before {
+  content: "\e910";
+}
+.icon-telegram:before {
+  content: "\e699";
+}
+.icon-share:before {
+  content: "\e920";
+}
+.icon-twitter:before {
+  content: "\e90d";
+}
+.icon-visa:before {
+  content: "\e908";
+}
+.icon-discover:before {
+  content: "\e90b";
+}
+.icon-mastercard:before {
+  content: "\e90c";
+}
+.icon-amex:before {
+  content: "\e90a";
+}
 .icon-dollar:before {
   content: "\e909";
 }
 .icon-USD:before {
   content: "\e915";
+}
+.icon-heart:before {
+  content: "\e68c";
+}
+.icon-check:before {
+  content: "\e934";
+}
+.icon-checkmark:before {
+  content: "\e937";
 }
 .icon-edit:before {
   content: "\e60d";
@@ -40,6 +82,9 @@
 .icon-search:before {
   content: "\f002";
 }
+.icon-delete:before {
+  content: "\e92b";
+}
 .icon-close:before {
   content: "\e935";
 }
@@ -48,12 +93,6 @@
 }
 .icon-minus:before {
   content: "\e938";
-}
-.icon-check:before {
-  content: "\e934";
-}
-.icon-checkmark:before {
-  content: "\e937";
 }
 .icon-chevron-left:before {
   content: "\e93b";
@@ -73,12 +112,6 @@
 .icon-dropdown-chevron:before {
   content: "\f0d7";
 }
-.icon-checkbox-filled:before {
-  content: "\e917";
-}
-.icon-dropdown-spinner:before {
-  content: "\eb23";
-}
 .icon-caret-down:before {
   content: "\e905";
 }
@@ -93,4 +126,10 @@
 }
 .icon-sort:before {
   content: "\e901";
+}
+.icon-checkbox-filled:before {
+  content: "\e917";
+}
+.icon-dropdown-spinner:before {
+  content: "\eb23";
 }

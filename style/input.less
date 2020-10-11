@@ -99,6 +99,10 @@ input {
     width: @input-swatch-width !important;
     height: @input-swatch-height !important;
 
+    &:hover:not(:active) {
+      &:extend(.pointer);
+    }
+
     &:before {
       &:extend(.position-center);
       &:extend(.object);
@@ -490,6 +494,12 @@ input, select, textarea {
     }
   }
 
+  &.swatch {
+    &:extend(.flex--row);
+    &:extend(.flex--row.middle);
+    &:extend(.flex--row.justify);
+  }
+
   .ui.selection.dropdown.readonly {
     .label {
       &:extend(.input-tag all);
@@ -665,6 +675,15 @@ div.select {
     padding-right: @size-smaller + @input-padding-h-value * 1.3; // add padding for icon
     //line-height: @input-line-height-fix;
   }
+}
+
+.input__delete {
+  &:extend(.margin-h-smaller);
+  &:extend(.button.small all);
+  &:extend(.button.circle all);
+  &:extend(.button.circle.small all);
+  &:extend(.appear-on-hover all);
+  background-color: @color-white !important;
 }
 
 /* Hidden Input Value Text to display Unit */
