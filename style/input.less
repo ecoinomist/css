@@ -105,12 +105,23 @@ input {
     }
 
     &:before {
-      &:extend(.position-center);
+      @offset: @border-size + size(1); // offset for border and focus outline
+      &:extend(.position-absolute);
       &:extend(.object);
-      width: calc(100% - @border-size * 2 - 2px); // offset for border and focus outline
-      height: calc(100% - @border-size * 2 - 2px);
+      top: @offset;
+      left: @offset;
+      right: @offset;
+      bottom: @offset;
       border-radius: inherit;
       background-color: inherit; // use color set by Input on change
+    }
+
+    &[value=""] {
+      &:extend(.swatch-null all);
+
+      &:before {
+        &:extend(.swatch-null all);
+      }
     }
   }
 
