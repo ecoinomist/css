@@ -6,7 +6,7 @@
 @slider-color-handle-hover: @color-tertiary-light;
 @slider-color-rail: @color-shadow-light;
 @slider-color-disabled: @color-text;
-@slider-track-size: @border-size-thick;
+@slider-track-size: size(3);
 @slider-handle-size: @slider-track-size * 6; // must be bigger than @slider-track-size
 @slider-track-padding: (@slider-handle-size - @slider-track-size) / 2;
 
@@ -17,7 +17,13 @@
 @slider-color-rail-inverted: @color-highlight-lighter;
 
 .app__slider {
-  /* Layout and Sizes */
+  &:hover {
+    cursor: grab;
+  }
+
+  &:active {
+    cursor: grabbing;
+  }
 
   &:not(.vertical) {
     height: @slider-handle-size;
@@ -44,6 +50,7 @@
   }
 
   .rc-slider-handle {
+    cursor: inherit !important;
     background-color: @slider-color-handle;
     border-color: @slider-color-handle-border;
 
@@ -132,7 +139,6 @@
 }
 
 .app__slider__label {
-  &:extend(.uppercase all);
   .text-truncate(@maxWidth: 45%);
 }
 
