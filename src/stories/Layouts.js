@@ -3,9 +3,12 @@ import { FILE } from 'react-ui-pack'
 import Icon from 'react-ui-pack/Icon'
 import Loading from 'react-ui-pack/Loading'
 import Row from 'react-ui-pack/Row'
+import { ScrollView, ScrollViewRef } from 'react-ui-pack/ScrollView'
 import Spinner from 'react-ui-pack/Spinner'
 import Square, { asSquare } from 'react-ui-pack/Square'
+import { Text } from 'react-ui-pack/Text'
 import View from 'react-ui-pack/View'
+import { warn } from 'utils-pack'
 
 Square.View = asSquare(View)
 Square.Row = asSquare(Row)
@@ -14,6 +17,7 @@ Square.Row = asSquare(Row)
  * Layouts
  */
 export default class Layouts extends Component {
+  onMountRef = warn
   render () {
     const squareClass = 'bg-home align-center fill'
     return (
@@ -91,22 +95,28 @@ export default class Layouts extends Component {
         <h6>H6 Header with <Icon name='search'/>
           <small>small text inside</small>
         </h6>
-        <p>
-          <Icon name='edit'/> Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <p>
-          Icons can be customised with
-          <a href='https://icomoon.io/app/#/select' target='_blank' rel='noopener noreferrer'> icomoon </a>
-          by uploading <code>src/web/style/fonts/icomoon/selection.json</code>
-        </p>
-        <Row>
-          <Spinner size='smallest' className='margin-right-smaller'/>
-          <a href='https://reactjs.org' target='_blank' rel='noopener noreferrer'>Learn React the easy way</a>
-        </Row>
-        <View>
-          <img src={FILE.PATH_IMAGES + 'logo.svg'} alt='logo'/>
-          <Loading/>
-        </View>
+        <ScrollView row className='padding-v'>
+          <Text className='bold no-wrap'>Horizontal ScrollView</Text>
+          <p className='no-wrap padding'>
+            <Icon name='edit'/> Edit <code>src/App.js</code> and save to reload.
+          </p>
+          <p className='no-wrap padding'>
+            Icons can be customised with
+            <a href='https://icomoon.io/app/#/select' target='_blank' rel='noopener noreferrer'> icomoon </a>
+            by uploading <code>src/web/style/fonts/icomoon/selection.json</code>
+          </p>
+        </ScrollView>
+        <ScrollViewRef className='padding-v' ref={this.onMountRef}>
+          <Text className='bold padding-v'>ScrollView with Ref</Text>
+          <Row>
+            <Spinner size='smallest' className='margin-right-smaller'/>
+            <a href='https://reactjs.org' target='_blank' rel='noopener noreferrer'>Learn React the easy way</a>
+          </Row>
+          <View>
+            <img src={FILE.PATH_IMAGES + 'logo.svg'} alt='logo'/>
+            <Loading/>
+          </View>
+        </ScrollViewRef>
       </View>
     )
   }
