@@ -1,4 +1,4 @@
 export {
   default as default
 // } from '../src/home'
-} from '../stories'
+} from '../stories/tester'
