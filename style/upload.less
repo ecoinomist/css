@@ -71,18 +71,36 @@
   color: @color-white;
 }
 
-.app__upload--grid {
+.upload-grid {
   &:extend(.flex--row all);
-  &:extend(.flex--row.spread all);
+  &:extend(.flex--row.justify--around all);
   &:extend(.flex--row.wrap all);
   &:extend(.no-padding all);
   color: @color-text-grey;
 }
 
-.app__upload--grid__item {
+.upload-grid__item {
   @paddingBetweenFiles: @padding-base;
-  @size: calc(100% / 3 - @paddingBetweenFiles);
-  .square(@size);
+
+  .count-1 > & {
+    &:extend(.full-size);
+  }
+
+  .count-3 > &,
+  .count-5 > &,
+  .count-6 > &,
+  .count-7 > &,
+  .count-9 > & {
+    @size: calc(100% / 3 - @paddingBetweenFiles);
+    .square(@size);
+  }
+
+  .count-2 > &,
+  .count-4 > &,
+  .count-8 > & {
+    @size: calc(100% / 2 - @paddingBetweenFiles);
+    .square(@size);
+  }
 
   &.preview {
     .app__upload__dropzone {

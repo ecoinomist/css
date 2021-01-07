@@ -15,8 +15,8 @@ import './testTranslation'
 Active.store = createStore([
   redux,
   saga,
-  popup,
   form,
+  popup,
   upload
 ].concat(
   // coreModules

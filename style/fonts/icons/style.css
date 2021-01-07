@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'icons';
-  src:  url('fonts/icons.eot?6rjf8u');
-  src:  url('fonts/icons.eot?6rjf8u#iefix') format('embedded-opentype'),
-    url('fonts/icons.ttf?6rjf8u') format('truetype'),
-    url('fonts/icons.woff?6rjf8u') format('woff'),
-    url('fonts/icons.svg?6rjf8u#icons') format('svg');
+  src:  url('fonts/icons.eot?r86wih');
+  src:  url('fonts/icons.eot?r86wih#iefix') format('embedded-opentype'),
+    url('fonts/icons.ttf?r86wih') format('truetype'),
+    url('fonts/icons.woff?r86wih') format('woff'),
+    url('fonts/icons.svg?r86wih#icons') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -25,6 +25,21 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-checkmark-circle:before {
+  content: "\e959";
+}
+.icon-cross-circle:before {
+  content: "\e95a";
+}
+.icon-plus-circle:before {
+  content: "\e95b";
+}
+.icon-circle-minus:before {
+  content: "\e95c";
+}
+.icon-plus-square:before {
+  content: "\e98e";
+}
 .icon-facebook:before {
   content: "\e913";
 }
@@ -112,6 +127,12 @@
 .icon-dropdown-chevron:before {
   content: "\f0d7";
 }
+.icon-checkbox-filled:before {
+  content: "\e917";
+}
+.icon-dropdown-spinner:before {
+  content: "\eb23";
+}
 .icon-caret-down:before {
   content: "\e905";
 }
@@ -126,10 +147,4 @@
 }
 .icon-sort:before {
   content: "\e901";
-}
-.icon-checkbox-filled:before {
-  content: "\e917";
-}
-.icon-dropdown-spinner:before {
-  content: "\eb23";
 }

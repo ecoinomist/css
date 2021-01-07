@@ -1,6 +1,6 @@
 import { multiple, search, upward, withForm } from 'modules-pack/form'
 import 'modules-pack/form/renders' // required for activation
-import { FIELD } from 'modules-pack/variables'
+import { FIELD, FILE_TYPE } from 'modules-pack/variables'
 import React, { Component } from 'react'
 import { cn, PropTypes } from 'react-ui-pack'
 import Text from 'react-ui-pack/Text'
@@ -48,8 +48,8 @@ class FormFields extends Component {
 export default function () {
   return (<>
     <View fill className='center max-size'>
-      <Text className='h5 center padding'>Form Fields Defined by Constants</Text>
-      <FormFields className="max-width-400 bg-neutral padding-v"/>
+      <Text className='h5 center padding'>Dynamic Field Definition</Text>
+      <FormFields className="max-width-400 bg-neutral padding-v min-width-290"/>
     </View>
   </>)
 }
@@ -60,6 +60,7 @@ FIELD.ID = {
 }
 FIELD.FOR = {
   FORM: [
+    {id: FIELD.ID.FILE, get label () {return _.PHOTOS}},
     {id: FIELD.ID.EMAIL},
     {id: FIELD.ID.TAGS},
   ]
@@ -67,8 +68,17 @@ FIELD.FOR = {
 FIELD.DEF = {
   [FIELD.ID.FILE]: {
     name: FIELD.ID.FILE,
-    get label () {return _.FILE},
-    view: FIELD.TYPE.UPLOAD,
+    count: 4,
+    square: true,
+    id: FILE_TYPE.IMAGE,
+    // loading: true,
+    // disabled: true,
+    // readonly: true, // will not render if no initial value exists - asField() logic
+    // iconUpload: 'plus',
+    // iconRemove: 'cross',
+    get label () {return _.UPLOAD},
+    get placeholder () {return _.DRAG_N_DROP},
+    view: FIELD.TYPE.UPLOAD_GRID,
   },
   [FIELD.ID.TAGS]: {
     name: FIELD.ID.TAGS,
@@ -83,11 +93,20 @@ FIELD.DEF = {
 const _ = {
   ...TRANSLATION,
   // FIELDS --------------------------------------------------------------------
+  DRAG_N_DROP: {
+    [l.ENGLISH]: 'Drag & Drop',
+  },
   ENTER___: {
     [l.ENGLISH]: 'Enter...',
   },
   TAGS: {
     [l.ENGLISH]: 'Tags',
+  },
+  PHOTOS: {
+    [l.ENGLISH]: 'Photos',
+  },
+  UPLOAD: {
+    [l.ENGLISH]: 'Upload',
   },
 }
 

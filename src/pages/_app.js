@@ -10,7 +10,7 @@ if (typeof window === 'undefined') {
 }
 
 /* Test Benchmarks */
-
+// todo: add App.js as wrapper
 function App ({Component, pageProps}) {
   if (typeof window !== 'undefined') console.log('ENV', ENV)
   return <>
