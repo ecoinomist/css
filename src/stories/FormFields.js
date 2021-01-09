@@ -60,15 +60,15 @@ FIELD.ID = {
 }
 FIELD.FOR = {
   FORM: [
-    {id: FIELD.ID.FILE, get label () {return _.PHOTOS}},
-    {id: FIELD.ID.EMAIL},
-    {id: FIELD.ID.TAGS},
+    {id: FIELD.ID.FILE, required: true, get label () {return _.PHOTOS}},
+    {id: FIELD.ID.EMAIL, required: true,},
+    {id: FIELD.ID.TAGS, required: true, info: 'Keywords to identify this entry'},
   ]
 }
 FIELD.DEF = {
   [FIELD.ID.FILE]: {
     name: FIELD.ID.FILE,
-    count: 4,
+    count: 1,
     square: true,
     id: FILE_TYPE.IMAGE,
     // loading: true,

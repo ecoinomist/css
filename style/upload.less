@@ -1,5 +1,6 @@
 @import "_mixins";
 @import "_layout";
+@import "input";
 
 .app__upload {
   &:extend(.flex--fill);
@@ -18,27 +19,49 @@
   }
 }
 
-.app__upload__dropzone {
+.upload__dropzone {
   &:extend(.flex--fill);
   &:extend(.align-center);
   min-height: 7rem;
   padding: @padding-base;
-  border: 1px dashed @color-link;
+  border: 1px dashed @input-color;
+  color: @input-color;
+
+  .inverted & {
+    border-color: @input-color-inverse;
+    color: @input-color-inverse;
+  }
 
   &:hover, &:focus, &:active, &.active {
     border-style: solid;
-    border-color: @color-link;
+    border-color: @input-color-active;
     background-color: @color-shadow;
+    color: @input-color-active;
     cursor: pointer;
     outline: none;
 
     .inverted & {
-      border-color: @color-link-inverse;
+      border-color: @input-color-active-inverse;
+      color: @input-color-active-inverse;
     }
   }
 
   &.disabled {
     opacity: 0.75;
+  }
+
+  .upload-grid.error & {
+    border-color: @color-error !important;
+    color: @color-error !important;
+
+    .inverted & {
+      border-color: @color-error-light !important;
+      color: @color-error-light !important;
+    }
+
+    &:focus {
+      .outline(@color: @color-error; @color-inverse: @color-error-light);
+    }
   }
 
   .app__modal__box__content & {
@@ -47,8 +70,8 @@
   }
 }
 
-.app__upload__file__add,
-.app__upload__file__remove {
+.upload__file__add,
+.upload__file__remove {
   &:extend(.position-absolute all);
   &:extend(.bg-white all);
   &:extend(.round all);
@@ -60,11 +83,11 @@
   }
 }
 
-.app__upload__file__add {
-  &:extend(.text.primary all);
+.upload__file__add {
+  //&:extend(.text.primary all);
 }
 
-.app__upload__file__number {
+.upload__file__number {
   &:extend(.position-top-left all);
   &:extend(.padding-small all);
   &:extend(.text-shadow-soft all);
@@ -103,17 +126,17 @@
   }
 
   &.preview {
-    .app__upload__dropzone {
+    .upload__dropzone {
       border: none;
     }
   }
 
-  .app__upload__dropzone {
+  .upload__dropzone {
     &:extend(.no-padding all);
     &:extend(.radius-large all);
     &:extend(.bg-grey-light all);
 
-    .app__upload__file {
+    .upload__file {
       &:extend(.full-width all);
       &:extend(.full-height all);
       &:extend(.radius-large all);

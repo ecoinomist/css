@@ -3,6 +3,8 @@
 @input-colors: primary;
 @input-color: @color-black; // label and border color
 @input-color-inverse: @color-text-grey; // inverted label and border color
+@input-color-active: @color-primary; // label and border color
+@input-color-active-inverse: @color-primary-light; // inverted label and border color
 @input-border: @border @input-color;
 @input-background-color: transparent;
 @input-background-color-interaction: transparent;
@@ -157,10 +159,10 @@ input, select, textarea {
     outline: 0;
     box-shadow: none; // overrides Semantic UI dropdown, but not default focus styling
     background-color: @input-background-color-interaction;
-    border-color: @color-primary;
+    border-color: @input-color-active;
 
     .inverted & {
-      border-color: @color-primary-light;
+      border-color: @input-color-active-inverse;
     }
   }
 
@@ -218,7 +220,7 @@ input, select, textarea {
       &:before {
         &:extend(.position-center all);
         .icon(@icon-checkmark);
-        color: @color-primary;
+        color: @input-color-active;
       }
     }
 
@@ -890,11 +892,11 @@ input {
 @checkbox-button-size: @checkbox-size - @checkbox-border-size * 2; //  - size(@checkbox-padding-size * 6) width of the circle
 @checkbox-button-offset-border: -@checkbox-border-size;
 @checkbox-button-offset-label: @checkbox-border-size + @checkbox-padding-size; // offset padding for label text
-@checked-bg-color: fade(@color-primary, 75%); // checked toggle color
+@checked-bg-color: fade(@input-color-active, 75%); // checked toggle color
 @checked-border-color: @checked-bg-color; // checked toggle color
 @unchecked-bg-color: transparent; // unchecked toggle color
 @unchecked-border-color: @input-color; // unchecked toggle color
-@checked-bg-color-inverse: fade(@color-primary-light, 50%);
+@checked-bg-color-inverse: fade(@input-color-active-inverse, 50%);
 @checked-border-color-inverse: @checked-bg-color-inverse;
 @unchecked-bg-color-inverse: fade(@input-color-inverse, 50%);
 @unchecked-border-color-inverse: @unchecked-bg-color-inverse;
