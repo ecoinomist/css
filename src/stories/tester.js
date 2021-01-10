@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import React, { PureComponent } from 'react'
-import View from 'react-ui-pack/View'
+import { ScrollView } from 'react-ui-pack/ScrollView'
 import { logRender } from 'utils-pack'
 
 import Content from './FormFields'
@@ -13,9 +13,9 @@ export default class TesterPage extends PureComponent {
         <Head>
           <title>Tester Pages</title>
         </Head>
-        <View fill className='bg-primary max-size'>
+        <ScrollView fill className='bg-primary max-size'>
           <Content/>
-        </View>
+        </ScrollView>
       </>
     )
   }

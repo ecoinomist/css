@@ -3,9 +3,11 @@ import 'modules-pack/form/renders' // required for activation
 import { FIELD, FILE_TYPE } from 'modules-pack/variables'
 import React, { Component } from 'react'
 import { cn, PropTypes } from 'react-ui-pack'
+import Icon from 'react-ui-pack/Icon'
+import { isRequired, OK } from 'react-ui-pack/inputs/validationRules'
 import Text from 'react-ui-pack/Text'
 import View from 'react-ui-pack/View'
-import { cloneDeep, l, localiseTranslation } from 'utils-pack'
+import { cloneDeep, l, localise, localiseTranslation } from 'utils-pack'
 import { TRANSLATION } from 'utils-pack/translations'
 
 @withForm()
@@ -54,32 +56,122 @@ export default function () {
   </>)
 }
 
+// DEFINITIONS -----------------------------------------------------------------
+export const _TEXTURE = {
+  KIND: {
+    BASE: {
+      _: 'base',
+      [l.ENGLISH]: 'Base',
+    },
+    BUMP: {
+      _: 'bump',
+      [l.ENGLISH]: 'Bump',
+    },
+  },
+  RES: {
+    LOW: {
+      _: '0', // identifier for upload file name in the server (do not change!!!)
+      [l.ENGLISH]: '',
+    },
+    HD: {
+      _: 'hd',
+      [l.ENGLISH]: 'HD',
+    },
+    // HDR: {
+    //   _: 'hdr',
+    //   [l.ENGLISH]: 'HDR',
+    // },
+  }
+}
+localise(_TEXTURE)
+export const TEXTURE_KINDS = Object.values(_TEXTURE.KIND)
+export const TEXTURE_RESOLUTIONS = Object.values(_TEXTURE.RES)
+
+// TRANSLATIONS ----------------------------------------------------------------
+const _ = {
+  ...TRANSLATION,
+  BASE_FILE_REQUIRED: {
+    [l.ENGLISH]: 'Base file required',
+  },
+  BASE_LOW_RESOLUTION_FILE_REQUIRED: {
+    [l.ENGLISH]: 'Base low resolution file required',
+  },
+  LOW_RESOLUTION_FILE_REQUIRED: {
+    [l.ENGLISH]: 'Low resolution file required',
+  },
+  DRAG_N_DROP: {
+    [l.ENGLISH]: 'Drag & Drop',
+  },
+  FILES: {
+    [l.ENGLISH]: 'Files',
+  },
+  ENTER___: {
+    [l.ENGLISH]: 'Enter...',
+  },
+  TAGS: {
+    [l.ENGLISH]: 'Tags',
+  },
+  PHOTO: {
+    [l.ENGLISH]: 'Photo',
+  },
+}
+localiseTranslation(_)
+
+// FIELDS ----------------------------------------------------------------------
 FIELD.ID = {
   FILE: 'file',
+  FILE_GRID: 'fileGrid',
+  FILE_GRID_KIND: 'fileGridKind',
   TAGS: 'tags',
 }
 FIELD.FOR = {
   FORM: [
-    {id: FIELD.ID.FILE, required: true, get label () {return _.PHOTOS}},
+    {id: FIELD.ID.FILE, required: true, get label () {return _.PHOTO}},
     {id: FIELD.ID.EMAIL, required: true,},
     {id: FIELD.ID.TAGS, required: true, info: 'Keywords to identify this entry'},
+    {id: FIELD.ID.FILE_GRID},
+    {
+      id: FIELD.ID.FILE_GRID_KIND,
+      validate: [isRequired, requiredBaseUpload, requiredLowResUpload, requiredBaseLowResUpload]
+    },
   ]
 }
 FIELD.DEF = {
   [FIELD.ID.FILE]: {
     name: FIELD.ID.FILE,
-    count: 1,
     square: true,
-    id: FILE_TYPE.IMAGE,
+    showName: true,
+    type: FILE_TYPE.IMAGE,
     // loading: true,
     // disabled: true,
     // readonly: true, // will not render if no initial value exists - asField() logic
     // iconUpload: 'plus',
     // iconRemove: 'cross',
-    get label () {return _.UPLOAD},
+    get label () {return _.FILES},
     get placeholder () {return _.DRAG_N_DROP},
     view: FIELD.TYPE.UPLOAD_GRID,
   },
+
+  [FIELD.ID.FILE_GRID]: {
+    name: FIELD.ID.FILE_GRID,
+    count: 4,
+    square: true,
+    showCount: true,
+    type: FILE_TYPE.IMAGE,
+    get label () {return _.FILES},
+    get placeholder () {return <Icon name='picture' className='larger fade no-margin'/>},
+    view: FIELD.TYPE.UPLOAD_GRID,
+  },
+
+  [FIELD.ID.FILE_GRID_KIND]: {
+    name: FIELD.ID.FILE_GRID_KIND,
+    square: {wScale: 2, hScale: 1},
+    type: FILE_TYPE.IMAGE,
+    get placeholder () {return <Icon name='picture' className='larger fade no-margin'/>},
+    kinds: TEXTURE_KINDS.map(def => ({_: def._, get name () {return def.name}, versions: TEXTURE_RESOLUTIONS})),
+    view: FIELD.TYPE.UPLOAD_GRIDS,
+  },
+
   [FIELD.ID.TAGS]: {
     name: FIELD.ID.TAGS,
     multiple, search, upward,
@@ -90,24 +182,14 @@ FIELD.DEF = {
   },
 }
 
-const _ = {
-  ...TRANSLATION,
-  // FIELDS --------------------------------------------------------------------
-  DRAG_N_DROP: {
-    [l.ENGLISH]: 'Drag & Drop',
-  },
-  ENTER___: {
-    [l.ENGLISH]: 'Enter...',
-  },
-  TAGS: {
-    [l.ENGLISH]: 'Tags',
-  },
-  PHOTOS: {
-    [l.ENGLISH]: 'Photos',
-  },
-  UPLOAD: {
-    [l.ENGLISH]: 'Upload',
-  },
+function requiredBaseUpload (files) {
+  return files.find(f => f.kind === _TEXTURE.KIND.BASE._) ? OK : _.BASE_FILE_REQUIRED
 }
 
-localiseTranslation(_)
+function requiredLowResUpload (files) {
+  return files.find(f => f.i === _TEXTURE.RES.LOW._) ? OK : _.LOW_RESOLUTION_FILE_REQUIRED
+}
+
+function requiredBaseLowResUpload (files) {
+  return files.find(f => f.kind === _TEXTURE.KIND.BASE._ && f.i === _TEXTURE.RES.LOW._) ? OK : _.BASE_LOW_RESOLUTION_FILE_REQUIRED
+}
