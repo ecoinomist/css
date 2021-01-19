@@ -174,7 +174,7 @@ FIELD.DEF = {
 
   [FIELD.ID.TAGS]: {
     name: FIELD.ID.TAGS,
-    multiple, search, upward,
+    multiple, search, upward, allowAdditions: true, onAddItem: console.warn,
     get placeholder () {return _.ENTER___},
     get label () {return _.TAGS},
     // options - to be loaded by component
