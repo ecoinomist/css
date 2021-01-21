@@ -1,15 +1,11 @@
 import Head from 'next/head'
 import React from 'react'
-import { Active, ENV } from 'utils-pack'
+import { ENV } from 'utils-pack'
+import '../_init'
 import { withStore } from '../store'
 
-// @Note: must use `typeof window === 'undefined'` for next.js to remove backend code from client
-// @see: https://flaviocopes.com/nextjs-server-client-code/
-if (typeof window === 'undefined') {
-  Active.log = require('chalk')
-}
-
 /* Test Benchmarks */
+
 // todo: add App.js as wrapper
 function App ({Component, pageProps}) {
   if (typeof window !== 'undefined') console.log('ENV', ENV)

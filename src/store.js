@@ -1,9 +1,7 @@
 // import formRedux from 'modules-pack/formRedux'
-import form from 'modules-pack/form'
-import popup from 'modules-pack/popup'
 import redux, { createStore } from 'modules-pack/redux'
 import saga from 'modules-pack/saga'
-import upload from 'modules-pack/upload'
+import user from 'modules-pack/user'
 import { createWrapper } from 'next-redux-wrapper'
 import { __DEV__, Active } from 'utils-pack'
 import './testTranslation'
@@ -12,15 +10,22 @@ import './testTranslation'
 // STORE CREATION
 // =============================================================================
 
-Active.store = createStore([
+let modules = [
   redux,
   saga,
-  form,
-  popup,
-  upload
-].concat(
-  // coreModules
-))
+]
+
+if (typeof window === 'undefined') {
+  // backend only modules
+} else {
+  // frontend only modules
+  modules = modules.concat(require('./_init/clientModules'))
+}
+
+Active.store = createStore(modules.concat([
+  // customModules
+  user,
+]))
 
 export default Active.store
 
