@@ -16,6 +16,12 @@ module.exports = withPlugins(
   {
     webpack (config) {
       modulesToTranspileResolve.forEach(pkg => config.resolve.alias[pkg] = path.resolve(__dirname, `../${pkg}/src`))
+      // import-graphql - requires 'graphql' and 'graphql-tag' packages
+      config.module.rules.push({
+        test: /\.(graphql|gql)$/,
+        exclude: /node_modules/,
+        loader: 'graphql-tag/loader',
+      })
       return config
     },
     publicRuntimeConfig: {
