@@ -502,6 +502,17 @@ input, select, textarea {
     }
   }
 
+  &.required {
+    > .input__label, // for Dropdown
+    > * > label { // for Native inputs
+      &:after {
+        content: '*';
+        display: inline-block;
+        margin-left: @margin-smaller;
+      }
+    }
+  }
+
   input:disabled,
   select:disabled,
   textarea:disabled {

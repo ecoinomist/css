@@ -102,6 +102,9 @@ const _ = {
   DRAG_N_DROP: {
     [l.ENGLISH]: 'Drag & Drop',
   },
+  ABOUT: {
+    [l.ENGLISH]: 'About',
+  },
   FILES: {
     [l.ENGLISH]: 'Files',
   },
@@ -128,6 +131,7 @@ FIELD.FOR = {
   FORM: [
     {id: FIELD.ID.FILE, required: true, get label () {return _.PHOTO}},
     {id: FIELD.ID.EMAIL, required: true,},
+    {id: FIELD.ID.ABOUT, required: true,},
     {id: FIELD.ID.TAGS, required: true, info: 'Keywords to identify this entry'},
     {id: FIELD.ID.FILE_GRID},
     {
@@ -137,6 +141,13 @@ FIELD.FOR = {
   ]
 }
 FIELD.DEF = {
+  [FIELD.ID.ABOUT]: {
+    name: FIELD.ID.ABOUT,
+    type: 'textarea',
+    get label () {return _.ABOUT},
+    view: FIELD.TYPE.INPUT, // required definition
+  },
+
   [FIELD.ID.FILE]: {
     name: FIELD.ID.FILE,
     square: true,

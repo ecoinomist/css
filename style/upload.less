@@ -109,19 +109,13 @@
 
 .upload-grid__item {
   @paddingBetweenFiles: @padding-base;
+  @size: ~"calc(100% / 3 - @{paddingBetweenFiles})";
+  width: @size;
+  padding-bottom: @size;
   height: 0;
 
   .count-1 > & {
-    &:extend(.full-width);
-    padding-bottom: 100%;
-  }
-
-  .count-3 > &,
-  .count-5 > &,
-  .count-6 > &,
-  .count-7 > &,
-  .count-9 > & {
-    @size: calc(100% / 3 - @paddingBetweenFiles);
+    @size: ~"calc(100% - @{paddingBetweenFiles})";
     width: @size;
     padding-bottom: @size;
   }
@@ -129,7 +123,7 @@
   .count-2 > &,
   .count-4 > &,
   .count-8 > & {
-    @size: calc(100% / 2 - @paddingBetweenFiles);
+    @size: ~"calc(100% / 2 - @{paddingBetweenFiles})";
     width: @size;
     padding-bottom: @size;
   }
