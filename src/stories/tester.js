@@ -13,7 +13,7 @@ export default class TesterPage extends PureComponent {
         <Head>
           <title>Tester Pages</title>
         </Head>
-        <ScrollView fill className='bg-primary max-size'>
+        <ScrollView fill className="bg-primary max-size">
           <Content/>
         </ScrollView>
       </>

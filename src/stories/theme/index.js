@@ -1,3 +1,4 @@
+import 'modules-pack/form/renders' // required for activation
 import Head from 'next/head'
 import React, { Component } from 'react'
 import Button from 'react-ui-pack/Button'

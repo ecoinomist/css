@@ -326,7 +326,7 @@ input, select, textarea {
     + .input__label {
       &:extend(.position-top-left all);
       top: @input-label-size-offset; // offset label size
-      z-index: -1; // make clicking input set focus immediately
+      pointer-events: none; // make clicking input set focus immediately
 
       .input--wrapper:not(.done) & {
         &:extend(.no-margin all); // need for multiple
@@ -770,10 +770,6 @@ div.select {
 //    </small>
 //  </View>
 // -----------------------------------------------------------------------------
-.input--wrapper.float {
-  z-index: 1; // fix for float label disappearing
-}
-
 .input--wrapper.float .input {
   font-size: @input-font-size;
   padding-top: @input-label-size;
@@ -809,7 +805,7 @@ div.select {
         &:extend(.bg-transparent all);
         &:extend(.input__label all);
         &:extend(.no-margin all);
-        z-index: -1; // make clicking input set focus immediately
+        pointer-events: none; // make clicking input set focus immediately
         top: @input-label-size-offset;
         padding: 0 @input-padding-h-value; // match input padding
         font-weight: normal;
