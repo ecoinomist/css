@@ -11,6 +11,7 @@ import Row from 'react-ui-pack/Row'
 import Select from 'react-ui-pack/Select'
 import Tooltip from 'react-ui-pack/Tooltip'
 import View from 'react-ui-pack/View'
+import { warn } from 'utils-pack'
 
 /**
  * Form Inputs
@@ -37,21 +38,21 @@ export default class Forms extends Component {
                             normalize={number({min: 0, max: 999999})}/>
               </Row>
               <Row className='justify'>
-                <InputField float name='begin' icon='clock' placeholder='hh:mm' stickyPlaceholder
-                            normalize={hourMinute} onChange={console.warn}>
+                <InputField float name="begin" icon="clock" placeholder="hh:mm" stickyPlaceholder
+                            normalize={hourMinute} onChange={warn}>
                   <Tooltip top>Begin Time</Tooltip>
                 </InputField>
-                <InputField float name='finish' icon='clock' placeholder='hh:mm' stickyPlaceholder
+                <InputField float name="finish" icon="clock" placeholder="hh:mm" stickyPlaceholder
                             normalize={hourMinute}>
                   <Tooltip top>Finish Time</Tooltip>
                 </InputField>
               </Row>
-              <Row className='justify'>
-                <InputField name='check' type='checkbox' label='checkbox' onChange={console.warn}/>
-                <InputField name='choice' type='radio' label='radio' onChange={console.warn}/>
+              <Row className="justify">
+                <InputField name="check" type="checkbox" label="checkbox" onChange={warn}/>
+                <InputField name="choice" type="radio" label="radio" onChange={warn}/>
               </Row>
-              <InputField name='color' type='color' label='Color Picker'/>
-              <Input type='color' label='Color Delete' onRemove={console.warn}/>
+              <InputField name="color" type="color" label="Color Picker"/>
+              <Input type="color" label="Color Delete" onRemove={warn}/>
             </form>
             <form className='app__form max-width-290 padding-h-small'>
               <InputField float name='url' type='url' placeholder='https://example.com' icon='chain' validate={url}/>

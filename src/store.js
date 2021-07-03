@@ -4,7 +4,6 @@ import saga from 'modules-pack/saga'
 import user from 'modules-pack/user'
 import { createWrapper } from 'next-redux-wrapper'
 import { __DEV__, Active } from 'utils-pack'
-import './testTranslation'
 
 // =============================================================================
 // STORE CREATION

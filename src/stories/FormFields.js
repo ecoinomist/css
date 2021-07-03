@@ -8,7 +8,7 @@ import { isRequired, OK } from 'react-ui-pack/inputs/validationRules'
 import Text from 'react-ui-pack/Text'
 import View from 'react-ui-pack/View'
 import { cloneDeep, l, localise, localiseTranslation } from 'utils-pack'
-import { TRANSLATION } from 'utils-pack/translations'
+import { _ } from 'utils-pack/translations'
 
 @withForm()
 class FormFields extends Component {
@@ -88,8 +88,7 @@ export const TEXTURE_KINDS = Object.values(_TEXTURE.KIND)
 export const TEXTURE_RESOLUTIONS = Object.values(_TEXTURE.RES)
 
 // TRANSLATIONS ----------------------------------------------------------------
-const _ = {
-  ...TRANSLATION,
+localiseTranslation({
   BASE_FILE_REQUIRED: {
     [l.ENGLISH]: 'Base file required',
   },
@@ -117,8 +116,7 @@ const _ = {
   PHOTO: {
     [l.ENGLISH]: 'Photo',
   },
-}
-localiseTranslation(_)
+})
 
 // FIELDS ----------------------------------------------------------------------
 FIELD.ID = {
