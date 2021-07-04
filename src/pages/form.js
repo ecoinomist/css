@@ -10,18 +10,18 @@ import Row from 'react-ui-pack/Row'
 import ScrollView from 'react-ui-pack/ScrollView'
 import Text from 'react-ui-pack/Text'
 import View from 'react-ui-pack/View'
-import { logRender } from 'utils-pack'
+import { logRender, warn } from 'utils-pack'
 
 FIELD.FOR = {
   CONTACT: [
     {
       id: FIELD.ID.EMAIL, required,
       // parse: (v) => {
-      //   console.warn('parse.renderInput', v)
+      //   warn('parse.renderInput', v)
       //   return v ? v.toUpperCase() : v
       // },
       // format: (v) => {
-      //   console.warn('format.renderInput', v)
+      //   warn('format.renderInput', v)
       //   return v ? v.toLowerCase() : v
       // },
     },
@@ -53,11 +53,11 @@ export default class FormPage extends PureComponent {
                 // validate={isRequired}
                 // onChange={this.handleChange}
                           parse={(v) => {
-                            console.warn('parse', v)
+                            warn('parse', v)
                             return v ? v.toUpperCase() : v
                           }}
                           format={(v) => {
-                            console.warn('format', v)
+                            warn('format', v)
                             return v ? v.toLowerCase() : v
                           }}
               />

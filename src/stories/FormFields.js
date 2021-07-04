@@ -7,7 +7,7 @@ import Icon from 'react-ui-pack/Icon'
 import { isRequired, OK } from 'react-ui-pack/inputs/validationRules'
 import Text from 'react-ui-pack/Text'
 import View from 'react-ui-pack/View'
-import { cloneDeep, l, localise, localiseTranslation } from 'utils-pack'
+import { cloneDeep, l, localise, localiseTranslation, warn } from 'utils-pack'
 import { _ } from 'utils-pack/translations'
 
 @withForm()
@@ -131,11 +131,11 @@ FIELD.FOR = {
     {id: FIELD.ID.EMAIL, required: true,},
     {id: FIELD.ID.ABOUT, required: true,},
     {id: FIELD.ID.TAGS, required: true, info: 'Keywords to identify this entry'},
-    {id: FIELD.ID.FILE_GRID},
     {
       id: FIELD.ID.FILE_GRID_KIND,
       validate: [isRequired, requiredBaseUpload, requiredLowResUpload, requiredBaseLowResUpload]
     },
+    {id: FIELD.ID.FILE_GRID},
   ]
 }
 FIELD.DEF = {
@@ -176,14 +176,14 @@ FIELD.DEF = {
     name: FIELD.ID.FILE_GRID_KIND,
     square: {wScale: 2, hScale: 1},
     type: FILE_TYPE.IMAGE,
-    get placeholder () {return <Icon name='picture' className='larger fade no-margin'/>},
-    kinds: TEXTURE_KINDS.map(def => ({_: def._, get name () {return def.name}, versions: TEXTURE_RESOLUTIONS})),
+    get placeholder () {return <Icon name="picture" className="larger fade no-margin"/>},
+    kinds: TEXTURE_KINDS.map(def => ({_: def._, get name () {return def.name}, types: TEXTURE_RESOLUTIONS})),
     view: FIELD.TYPE.UPLOAD_GRIDS,
   },
 
   [FIELD.ID.TAGS]: {
     name: FIELD.ID.TAGS,
-    multiple, search, upward, allowAdditions: true, onAddItem: console.warn,
+    multiple, search, upward, allowAdditions: true, onAddItem: warn,
     get placeholder () {return _.ENTER___},
     get label () {return _.TAGS},
     // options - to be loaded by component
