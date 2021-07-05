@@ -1,6 +1,6 @@
-import { multiple, search, upward, withForm } from 'modules-pack/form'
+import { multiple, required, search, upward, withForm } from 'modules-pack/form'
 import 'modules-pack/form/renders' // required for activation
-import { FIELD, FILE_TYPE } from 'modules-pack/variables'
+import { CURRENCY, FIELD, FILE_TYPE, OPTIONS, TYPE } from 'modules-pack/variables'
 import React, { Component } from 'react'
 import { cn, PropTypes } from 'react-ui-pack'
 import Icon from 'react-ui-pack/Icon'
@@ -123,14 +123,17 @@ FIELD.ID = {
   FILE: 'file',
   FILE_GRID: 'fileGrid',
   FILE_GRID_KIND: 'fileGridKind',
+  MULTIPLE_DROPDOWN: 'multipleDropdown',
   TAGS: 'tags',
 }
 FIELD.FOR = {
   FORM: [
-    {id: FIELD.ID.FILE, required: true, get label () {return _.PHOTO}},
-    {id: FIELD.ID.EMAIL, required: true,},
-    {id: FIELD.ID.ABOUT, required: true,},
-    {id: FIELD.ID.TAGS, required: true, info: 'Keywords to identify this entry'},
+    {id: FIELD.ID.FILE, required, get label () {return _.PHOTO}},
+    {id: FIELD.ID.EMAIL, required},
+    {id: FIELD.ID.ABOUT, required},
+    {id: FIELD.ID.PHONE, required},
+    {id: FIELD.ID.MULTIPLE_DROPDOWN},
+    {id: FIELD.ID.TAGS, required, info: 'Keywords to identify this entry'},
     {
       id: FIELD.ID.FILE_GRID_KIND,
       validate: [isRequired, requiredBaseUpload, requiredLowResUpload, requiredBaseLowResUpload]
@@ -179,6 +182,39 @@ FIELD.DEF = {
     get placeholder () {return <Icon name="picture" className="larger fade no-margin"/>},
     kinds: TEXTURE_KINDS.map(def => ({_: def._, get name () {return def.name}, types: TEXTURE_RESOLUTIONS})),
     view: FIELD.TYPE.UPLOAD_GRIDS,
+  },
+
+  [FIELD.ID.MULTIPLE_DROPDOWN]: {
+    name: 'currency',
+    get labelGroup () {return 'Countries by Currency'},
+    get labelType () {return TYPE.CURRENCY.name},
+    options: OPTIONS.CURRENCY,
+    minFields: 1,
+    /**
+     * Map props to each Input Field inside multiple Fields
+     * @param {Object<value, text>} field - one of `options` value
+     * @param {Class<props, state, fields>} instance - of the Fields component
+     * @returns {Object} props - to pass down to each selected field
+     */
+    kindProps: (field, instance) => {
+      const options = instance._does_not_exist_prop || []
+      const props = {options, search, multiple}
+      switch (field.value) {
+        case CURRENCY.USD._:
+          props.options.push('America')
+          return props
+        case CURRENCY.EUR._:
+          props.options.push('Germany', 'France', 'Italy')
+          return props
+        case CURRENCY.RUB._:
+          props.options.push('Russia')
+          return props
+        default:
+          return props
+      }
+    },
+    kind: FIELD.TYPE.SELECT,
+    view: FIELD.TYPE.MULTIPLE,
   },
 
   [FIELD.ID.TAGS]: {
