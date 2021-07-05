@@ -1,4 +1,4 @@
-import { multiple, required, search, upward, withForm } from 'modules-pack/form'
+import { multiple, required, search, withForm } from 'modules-pack/form'
 import 'modules-pack/form/renders' // required for activation
 import { CURRENCY, FIELD, FILE_TYPE, OPTIONS, TYPE } from 'modules-pack/variables'
 import React, { Component } from 'react'
@@ -132,7 +132,7 @@ FIELD.FOR = {
     {id: FIELD.ID.EMAIL, required},
     {id: FIELD.ID.ABOUT, required},
     {id: FIELD.ID.PHONE, required},
-    {id: FIELD.ID.MULTIPLE_DROPDOWN},
+    {id: FIELD.ID.MULTIPLE_DROPDOWN, required},
     {id: FIELD.ID.TAGS, required, info: 'Keywords to identify this entry'},
     {
       id: FIELD.ID.FILE_GRID_KIND,
@@ -219,7 +219,7 @@ FIELD.DEF = {
 
   [FIELD.ID.TAGS]: {
     name: FIELD.ID.TAGS,
-    multiple, search, upward, allowAdditions: true, onAddItem: warn,
+    multiple, search, allowAdditions: true, onAddItem: warn,
     get placeholder () {return _.ENTER___},
     get label () {return _.TAGS},
     // options - to be loaded by component

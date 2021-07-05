@@ -26,6 +26,8 @@
 // Color swatch
 @input-swatch-width: size(40);
 @input-swatch-height: size(33);
+// Icons
+@select-icons: ~'> i.icon.delete, > i.icon.dropdown, > i.icon.search, > i[class^="icon-"], > i[class*=" icon-"]';
 
 .input-done {
   border-color: fade(@input-color, 35%);
@@ -184,7 +186,7 @@ input, select, textarea {
       cursor: default;
     }
 
-    > i.icon.dropdown {
+    @{select-icons} {
       opacity: 0.4;
     }
   }
@@ -340,7 +342,7 @@ input, select, textarea {
     .input--wrapper.done & {
       border-color: transparent;
 
-      i.icon.dropdown {
+      @{select-icons} {
         opacity: 0;
       }
     }
@@ -372,12 +374,12 @@ input, select, textarea {
   // Padding syncing:
   + .input__label,
   > .text.default,
-  i.icon.dropdown {
+  @{select-icons} {
     .scalePadding(@size: @input-font-size, @top: @input-padding-v, @left: @input-padding-h);
   }
 
-  &.loading > {
-    i.icon.dropdown {
+  &.loading {
+    @{select-icons} {
       &:extend(.spin all);
       .scalePadding(@size: @input-font-size, @top: @input-padding-v, @left: @input-padding-h) !important;
       height: initial !important;
@@ -406,14 +408,15 @@ input, select, textarea {
 
     + .input__label,
     > .text.default,
-    i.icon.dropdown {
+    @{select-icons} {
       .scalePadding(@size: @input-font-size, @top: @input-padding-v, @left: @input-padding-h / 2);
     }
   }
 
-  i.icon.dropdown {
+  @{select-icons} {
     &:extend(.position-absolute);
     &:extend(.no-margin all);
+    &:extend(.no-outline all);
     top: @border-size;
     right: @border-size;
     opacity: 1;
@@ -609,8 +612,8 @@ div.select {
     font-size: inherit; // prevent Semantic UI override
 
     @{select-icon} {
+      &:extend(.no-outline all);
       z-index: 1;
-      .no-outline();
 
       &.pointer {
         @{select-interaction} {
@@ -838,7 +841,7 @@ div.select {
       &:extend(.no-padding-v all);
     }
 
-    i.icon.dropdown {
+    @{select-icons} {
       opacity: 0;
     }
   }

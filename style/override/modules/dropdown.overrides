@@ -56,12 +56,16 @@
     opacity: initial !important; //override .disabled styling
   }
 
-  > .dropdown.icon {
-    .icon();
+  > i.icon {
+    .icon() !important;
+  }
 
-    &:before {
-      content: @icon-dropdown-chevron;
-    }
+  > i.dropdown.icon:before {
+    content: @icon-dropdown-chevron;
+  }
+
+  > i.delete.icon:before {
+    content: @icon-delete;
   }
 
   // Placeholder
