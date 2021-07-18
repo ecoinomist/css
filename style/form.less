@@ -34,6 +34,21 @@
       width: 100%;
     }
   }
+
+  // Remove margin inside tab content if input wrapper is not rendered in a row
+  .tabs__content > * > .input--wrapper {
+    &:extend(.no-margin-top all);
+  }
+
+  // Match tab items padding with label margin
+  .input--wrapper .tabs__items, // UploadGrids case
+  .fields-in-group > .tabs .tabs__items {
+    &:extend(.padding-h-small all);
+  }
+
+  .fields-in-group > .tabs {
+    &:extend(.margin-top all);
+  }
 }
 
 /* Group of Inputs */

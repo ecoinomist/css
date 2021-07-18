@@ -1,8 +1,9 @@
 import { multiple, required, search, withForm } from 'modules-pack/form'
 import 'modules-pack/form/renders' // required for activation
-import { CURRENCY, FIELD, FILE_TYPE, OPTIONS, TYPE } from 'modules-pack/variables'
+import { CURRENCY, FIELD, FILE, OPTIONS, TYPE } from 'modules-pack/variables'
 import React, { Component } from 'react'
 import { cn, PropTypes } from 'react-ui-pack'
+import Button from 'react-ui-pack/Button'
 import Icon from 'react-ui-pack/Icon'
 import { isRequired, OK } from 'react-ui-pack/inputs/validationRules'
 import Text from 'react-ui-pack/Text'
@@ -34,13 +35,21 @@ class FormFields extends Component {
   }
 
   render () {
-    const {className, style} = this.props
+    const {className, style, loading, saved} = this.props
     const fields = this.fields.map(this.fieldsSetup)
     if (!fields.length) return null
+    const canSave = this.canSave
+    warn(`${this.constructor.name}.formValues`, this.formValues)
     return (
       <View className={cn('form', className)} style={style}>
-        <View className='app__form padding-h'>
+        <View className="app__form padding-h">
           {this.renderInput(fields)}
+          <View className="margin-v-larger left">
+            <Button className="secondary round" disabled={!canSave} loading={loading}>
+              {saved && !canSave ? _.SAVED : _.SAVE}
+            </Button>
+            {this.validationErrorsTooltip}
+          </View>
         </View>
       </View>
     )
@@ -101,6 +110,12 @@ localiseTranslation({
   DRAG_N_DROP: {
     [l.ENGLISH]: 'Drag & Drop',
   },
+  FIRST_NAME: {
+    [l.ENGLISH]: 'First Name',
+  },
+  LAST_NAME: {
+    [l.ENGLISH]: 'Last Name',
+  },
   ABOUT: {
     [l.ENGLISH]: 'About',
   },
@@ -120,28 +135,61 @@ localiseTranslation({
 
 // FIELDS ----------------------------------------------------------------------
 FIELD.ID = {
+  FIRST_NAME: 'firstname',
+  LAST_NAME: 'surname',
   FILE: 'file',
   FILE_GRID: 'fileGrid',
   FILE_GRID_KIND: 'fileGridKind',
+  GROUP: 'group', // can be reused with different layouts
   MULTIPLE_DROPDOWN: 'multipleDropdown',
   TAGS: 'tags',
 }
 FIELD.FOR = {
   FORM: [
-    {id: FIELD.ID.FILE, required, get label () {return _.PHOTO}},
     {id: FIELD.ID.EMAIL, required},
-    {id: FIELD.ID.ABOUT, required},
     {id: FIELD.ID.PHONE, required},
     {id: FIELD.ID.MULTIPLE_DROPDOWN, required},
     {id: FIELD.ID.TAGS, required, info: 'Keywords to identify this entry'},
+    {id: FIELD.ID.ABOUT, required},
+    { // `required` can be passed down as group, leave undefined by default for customisation
+      id: FIELD.ID.GROUP,
+      items: [{id: FIELD.ID.FIRST_NAME}, {id: FIELD.ID.LAST_NAME}],
+    },
+    {
+      id: FIELD.ID.GROUP,
+      // centerTabs: true,
+      kind: FIELD.TYPE.TABS,
+      items: TEXTURE_KINDS.map((def) => ({
+        id: FIELD.ID.FILE,
+        name: def._,
+        multiple: false,
+        required: def._ === _TEXTURE.KIND.BASE._,
+        get label () {return def.name}
+      }))
+    },
+    {id: FIELD.ID.FILE, required, get label () {return _.PHOTO}},
+    {id: FIELD.ID.FILE_GRID},
     {
       id: FIELD.ID.FILE_GRID_KIND,
       validate: [isRequired, requiredBaseUpload, requiredLowResUpload, requiredBaseLowResUpload]
     },
-    {id: FIELD.ID.FILE_GRID},
   ]
 }
 FIELD.DEF = {
+  [FIELD.ID.FIRST_NAME]: {
+    name: 'name',
+    get label () {return _.FIRST_NAME},
+    // get hint () {return _.MY_FIRST_NAME_IS},
+    view: FIELD.TYPE.INPUT,
+  },
+
+  [FIELD.ID.LAST_NAME]: {
+    name: 'surname',
+    get label () {return _.LAST_NAME},
+    // get hint () {return _.MY_FAMILY_NAME_IS},
+    view: FIELD.TYPE.INPUT,
+  },
+
   [FIELD.ID.ABOUT]: {
     name: FIELD.ID.ABOUT,
     type: 'textarea',
@@ -153,7 +201,7 @@ FIELD.DEF = {
     name: FIELD.ID.FILE,
     square: true,
     showName: true,
-    type: FILE_TYPE.IMAGE,
+    type: FILE.TYPE.IMAGE,
     // loading: true,
     // disabled: true,
     // readonly: true, // will not render if no initial value exists - asField() logic
@@ -169,16 +217,16 @@ FIELD.DEF = {
     count: 4,
     square: true,
     showCount: true,
-    type: FILE_TYPE.IMAGE,
+    type: FILE.TYPE.IMAGE,
     get label () {return _.FILES},
-    get placeholder () {return <Icon name='picture' className='larger fade no-margin'/>},
+    get placeholder () {return <Icon name="picture" className="larger fade no-margin"/>},
     view: FIELD.TYPE.UPLOAD_GRID,
   },
 
   [FIELD.ID.FILE_GRID_KIND]: {
     name: FIELD.ID.FILE_GRID_KIND,
     square: {wScale: 2, hScale: 1},
-    type: FILE_TYPE.IMAGE,
+    type: FILE.TYPE.IMAGE,
     get placeholder () {return <Icon name="picture" className="larger fade no-margin"/>},
     kinds: TEXTURE_KINDS.map(def => ({_: def._, get name () {return def.name}, types: TEXTURE_RESOLUTIONS})),
     view: FIELD.TYPE.UPLOAD_GRIDS,
@@ -186,7 +234,7 @@ FIELD.DEF = {
 
   [FIELD.ID.MULTIPLE_DROPDOWN]: {
     name: 'currency',
-    get labelGroup () {return 'Countries by Currency'},
+    get labelGroup () {return 'Countries'},
     get labelType () {return TYPE.CURRENCY.name},
     options: OPTIONS.CURRENCY,
     minFields: 1,
@@ -215,6 +263,10 @@ FIELD.DEF = {
     },
     kind: FIELD.TYPE.SELECT,
     view: FIELD.TYPE.MULTIPLE,
+  },
+
+  [FIELD.ID.GROUP]: {
+    view: FIELD.TYPE.GROUP,
   },
 
   [FIELD.ID.TAGS]: {

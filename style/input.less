@@ -29,6 +29,9 @@
 // Icons
 @select-icons: ~'> i.icon.delete, > i.icon.dropdown, > i.icon.search, > i[class^="icon-"], > i[class*=" icon-"]';
 
+// -----------------------------------------------------------------------------
+// MIXINS ----------------------------------------------------------------------
+// -----------------------------------------------------------------------------
 .input-done {
   border-color: fade(@input-color, 35%);
   //border-style: dashed;
@@ -63,6 +66,14 @@
   &.disabled,
   &.no-pointer {
     border-style: dotted;
+  }
+}
+
+label.required {
+  &:after {
+    content: '*';
+    display: inline-block;
+    margin-left: @margin-smaller;
   }
 }
 
@@ -249,6 +260,7 @@ input, select, textarea {
 .input__label {
   &:extend(.margin-smaller all);
   &:extend(.round all);
+  &:extend(.uppercase all);
   color: @input-color;
   font-size: @input-label-size-default-ratio * 100%; // use percent unit so it scales automatically
   line-height: @input-label-line-height;
@@ -508,11 +520,7 @@ input, select, textarea {
   &.required {
     > .input__label, // for Dropdown
     > * > label { // for Native inputs
-      &:after {
-        content: '*';
-        display: inline-block;
-        margin-left: @margin-smaller;
-      }
+      &:extend(label.required all);
     }
   }
 
