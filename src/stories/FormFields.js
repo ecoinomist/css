@@ -219,7 +219,7 @@ FIELD.DEF = {
     showCount: true,
     type: FILE.TYPE.IMAGE,
     get label () {return _.FILES},
-    get placeholder () {return <Icon name="picture" className="larger fade no-margin"/>},
+    placeholder: <Icon name="picture" className="larger fade no-margin"/>,
     view: FIELD.TYPE.UPLOAD_GRID,
   },
 
@@ -227,7 +227,7 @@ FIELD.DEF = {
     name: FIELD.ID.FILE_GRID_KIND,
     square: {wScale: 2, hScale: 1},
     type: FILE.TYPE.IMAGE,
-    get placeholder () {return <Icon name="picture" className="larger fade no-margin"/>},
+    placeholder: <Icon name="picture" className="larger fade no-margin"/>,
     kinds: TEXTURE_KINDS.map(def => ({_: def._, get name () {return def.name}, types: TEXTURE_RESOLUTIONS})),
     view: FIELD.TYPE.UPLOAD_GRIDS,
   },

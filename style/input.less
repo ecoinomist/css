@@ -983,16 +983,19 @@ input.checkbox.toggle {
     }
   }
 
-  &:disabled {
-    + label {
-      &:extend(.input-disabled all);
-      opacity: 0.5;
+  &:disabled + label {
+    &:extend(.input-disabled all);
+    opacity: 0.5;
 
-      .inverted & {
-        background-color: transparent !important;
-        border-color: @color-border-light !important;
-      }
+    .inverted & {
+      background-color: transparent !important;
+      border-color: @color-border-light !important;
     }
+  }
+
+  &[readonly] + label {
+    &:extend(.input-readonly all);
+    pointer-events: initial !important; // for tooltip to work
   }
 }
 
