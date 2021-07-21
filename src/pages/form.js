@@ -34,7 +34,7 @@ export default class FormPage extends PureComponent {
 
   render () {
     const {activePopups} = this.props
-    const {hasInputChanges} = this.state
+    const hasChanged = this.changedValues
     const canSave = this.canSave
     const changedValues = this.changedValues || {}
     const registeredValues = this.registeredValues || {}
@@ -66,7 +66,7 @@ export default class FormPage extends PureComponent {
             </View>
             <View className='margin'>
               <Row className='wrap margin'>
-                <Button disabled={!hasInputChanges}>Has Input Changes</Button>
+                <Button disabled={!hasChanged}>Has Changed</Button>
                 <Button disabled={!canSave}>Can Save</Button>
               </Row>
               <Row className='wrap margin'>
