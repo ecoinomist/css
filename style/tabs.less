@@ -1,6 +1,6 @@
 @import "_mixins";
 
-@tabs-active-border-size: size(4);
+@tabs-active-border-size: size(2);
 @tabs-active-border-color: @color-primary-light;
 @tabs-active-color: @color-primary-light;
 
@@ -25,7 +25,7 @@
 
   &.active {
     &:extend(.text.bold);
-    border-color: transparent;
+    border-color: @tabs-active-border-color !important;
     color: @tabs-active-color;
 
     &:after {
