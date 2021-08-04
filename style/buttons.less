@@ -1,0 +1,106 @@
+@import "_mixins";
+@import "button";
+
+@buttons-active-color: inherit;
+@buttons-active-bg-color: @color-shadow-light;
+
+/* Buttons styled as Tabs */
+.buttons {
+  > .button {
+    border-radius: 0;
+
+    &:focus-within {
+      .outline(@radius: initial); // for hidden second inner tooltip with position-fill span onClick
+    }
+
+    @{select-interaction} {
+      border-radius: initial;
+
+      &:not(:disabled) {
+        color: @buttons-active-color;
+        background-color: @buttons-active-bg-color;
+      }
+    }
+
+    &.active {
+      color: @buttons-active-color;
+      background-color: @buttons-active-bg-color;
+    }
+
+    > .text.position-fill {
+      //pointer-events: none;
+      //z-index: -1;
+    }
+  }
+
+  // Horizontal layout
+  &:not(.vertical) > .button {
+
+    // by default hide right border,
+    // only active and last child tabs have all borders
+    &:not(.active):not(:last-child) {
+      border-right: 0;
+    }
+
+    // Then hide left border for the tab following active tab
+    &.active + * {
+      border-left: 0;
+    }
+
+    &:first-child {
+      border-top-left-radius: @button-radius;
+      border-bottom-left-radius: @button-radius;
+    }
+
+    &:last-child {
+      border-top-right-radius: @button-radius;
+      border-bottom-right-radius: @button-radius;
+    }
+  }
+
+  &.vertical > .button {
+
+    // by default hide bottom border,
+    // only active and last child tabs have all borders
+    &:not(.active):not(:last-child) {
+      border-bottom: 0;
+    }
+
+    // Then hide top border for the tab following active tab
+    &.active + * {
+      border-top: 0;
+    }
+
+    &:first-child {
+      border-top-left-radius: @button-radius;
+      border-top-right-radius: @button-radius;
+    }
+
+    &:last-child {
+      border-bottom-left-radius: @button-radius;
+      border-bottom-right-radius: @button-radius;
+    }
+
+    // When nest Dropdown Menu has the first nested button overlapped,
+    // change border radius to match the parent.
+    // `overlap` class must be applied to Semantic UI Popup container,
+    // because we cannot target ui popup via .buttons, since it's a separate DOM element at the root.
+    .overlap:not(.first):not(.last) > & {
+      &:first-child {
+        border-radius: 0;
+      }
+    }
+
+    .overlap.last > & {
+      &:first-child {
+        border-top-left-radius: 0;
+      }
+    }
+
+    .overlap.first > & {
+      &:first-child {
+        border-top-right-radius: 0;
+      }
+    }
+  }
+}
