@@ -18,6 +18,7 @@
   ],
   "scripts": {
     "dev": "NODE_ENV=development yarn cache clean && yarn css && next dev & yarn style:watch",
+    "publish": "yarn push && git push",
     "push": "cp {README.md,LICENSE,package.json} style/ && cd style && yarn publish && cd ../ && yarn delete style/{README.md,LICENSE,package.json}",
     "delete": "../../node_modules/rimraf/bin.js",
     "build": "NODE_ENV=production yarn css && ../web/node_modules/.bin/next build",
