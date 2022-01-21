@@ -1,9 +1,10 @@
 import Head from 'next/head'
 import React from 'react'
 import { ENV } from 'utils-pack'
-import '../_init'
+import * as i from '../_init'
 import { withStore } from '../store'
 
+const sideEffects = {i}
 /* Test Benchmarks */
 
 // todo: add App.js as wrapper

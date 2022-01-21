@@ -1,6 +1,6 @@
 import { required } from 'modules-pack/form/constants'
 import { InputField } from 'modules-pack/form/inputs'
-import 'modules-pack/form/renders'
+import * as r from 'modules-pack/form/renders'
 import { FIELD } from 'modules-pack/variables'
 import Head from 'next/head'
 import { PureComponent } from 'react'
@@ -11,6 +11,8 @@ import ScrollView from 'react-ui-pack/ScrollView'
 import Text from 'react-ui-pack/Text'
 import View from 'react-ui-pack/View'
 import { logRender, warn } from 'utils-pack'
+
+const sideEffects = {r}
 
 FIELD.FOR = {
   CONTACT: [

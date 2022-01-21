@@ -1,5 +1,5 @@
 import { multiple, required, search, withForm } from 'modules-pack/form'
-import 'modules-pack/form/renders' // required for activation
+import * as r from 'modules-pack/form/renders' // required for activation
 import { CURRENCY, FIELD, FILE, OPTIONS, TYPE } from 'modules-pack/variables'
 import React, { Component } from 'react'
 import { cn, PropTypes } from 'react-ui-pack'
@@ -10,6 +10,8 @@ import Text from 'react-ui-pack/Text'
 import View from 'react-ui-pack/View'
 import { cloneDeep, l, localise, localiseTranslation, warn } from 'utils-pack'
 import { _ } from 'utils-pack/translations'
+
+const sideEffects = {r}
 
 @withForm()
 class FormFields extends Component {

@@ -1,4 +1,4 @@
-import 'modules-pack/form/renders' // required for activation
+import * as r from 'modules-pack/form/renders' // required for activation
 import Head from 'next/head'
 import React, { Component } from 'react'
 import Button from 'react-ui-pack/Button'
@@ -10,6 +10,8 @@ import Charts from './Charts'
 import Dropdowns from './Dropdowns'
 import Forms from './Forms'
 import Layouts from './Layouts'
+
+const sideEffects = {r}
 
 @logRender
 export default class Theme extends Component {
