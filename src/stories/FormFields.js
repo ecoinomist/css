@@ -203,7 +203,7 @@ FIELD.DEF = {
     name: FIELD.ID.FILE,
     square: true,
     showName: true,
-    type: FILE.TYPE.IMAGE,
+    fileType: FILE.TYPE.IMAGE,
     // loading: true,
     // disabled: true,
     // readonly: true, // will not render if no initial value exists - asField() logic
@@ -219,7 +219,7 @@ FIELD.DEF = {
     count: 4,
     square: true,
     showCount: true,
-    type: FILE.TYPE.IMAGE,
+    fileType: FILE.TYPE.IMAGE,
     get label () {return _.FILES},
     placeholder: <Icon name="picture" className="larger fade no-margin"/>,
     view: FIELD.TYPE.UPLOAD_GRID,
@@ -228,7 +228,7 @@ FIELD.DEF = {
   [FIELD.ID.FILE_GRID_KIND]: {
     name: FIELD.ID.FILE_GRID_KIND,
     square: {wScale: 2, hScale: 1},
-    type: FILE.TYPE.IMAGE,
+    fileType: FILE.TYPE.IMAGE,
     placeholder: <Icon name="picture" className="larger fade no-margin"/>,
     kinds: TEXTURE_KINDS.map(def => ({_: def._, get name () {return def.name}, types: TEXTURE_RESOLUTIONS})),
     view: FIELD.TYPE.UPLOAD_GRIDS,
