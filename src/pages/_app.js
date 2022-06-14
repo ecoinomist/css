@@ -1,12 +1,12 @@
 import Head from 'next/head'
 import React from 'react'
-import { ENV } from 'utils-pack'
 import * as i from '../_init'
+import { ENV } from 'utils-pack'
 import { withStore } from '../store'
 
 const sideEffects = {i}
-/* Test Benchmarks */
 
+/* Test Benchmarks */
 // todo: add App.js as wrapper
 function App ({Component, pageProps}) {
   if (typeof window !== 'undefined') console.log('ENV', ENV)

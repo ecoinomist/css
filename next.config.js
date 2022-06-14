@@ -5,6 +5,11 @@ const modulesToTranspileResolve = [ // modules you would like to see transpiled 
   'react-ui-pack',
   'utils-pack'
 ]
+const clientEnvs = {}
+for (const key in process.env) {
+  if (key.indexOf('REACT_APP_') === 0) clientEnvs[key] = process.env[key]
+}
+console.warn(clientEnvs)
 module.exports = withPlugins(
   // Next.js plugins
   [
@@ -25,7 +30,8 @@ module.exports = withPlugins(
       return config
     },
     publicRuntimeConfig: {
-      NODE_ENV: process.env.NODE_ENV
+      NODE_ENV: process.env.NODE_ENV,
+      ...clientEnvs,
     }
   }
 )

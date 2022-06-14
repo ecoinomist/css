@@ -8,7 +8,7 @@ import Icon from 'react-ui-pack/Icon'
 import { isRequired, OK } from 'react-ui-pack/inputs/validationRules'
 import Text from 'react-ui-pack/Text'
 import View from 'react-ui-pack/View'
-import { cloneDeep, l, localise, localiseTranslation, warn } from 'utils-pack'
+import { cloneDeep, interpolateString as ips, l, localise, localiseTranslation, round, warn } from 'utils-pack'
 import { _ } from 'utils-pack/translations'
 
 const sideEffects = {r}
@@ -60,8 +60,8 @@ class FormFields extends Component {
 
 export default function () {
   return (<>
-    <View fill className='center max-size'>
-      <Text className='h5 center padding'>Dynamic Field Definition</Text>
+    <View fill className="center max-size">
+      <Text className="h5 center padding">Dynamic Field Definition</Text>
       <FormFields className="max-width-400 bg-neutral padding-v min-width-290"/>
     </View>
   </>)
@@ -130,9 +130,18 @@ localiseTranslation({
   TAGS: {
     [l.ENGLISH]: 'Tags',
   },
+  PERCENT: {
+    [l.ENGLISH]: 'Percent',
+  },
   PHOTO: {
     [l.ENGLISH]: 'Photo',
   },
+  SLIDER_DOUBLE: {
+    [l.ENGLISH]: 'Slider Double',
+  },
+  value_PERCENT: {
+    [l.ENGLISH]: '{value}%',
+  }
 })
 
 // FIELDS ----------------------------------------------------------------------
@@ -144,15 +153,19 @@ FIELD.ID = {
   FILE_GRID_KIND: 'fileGridKind',
   GROUP: 'group', // can be reused with different layouts
   MULTIPLE_DROPDOWN: 'multipleDropdown',
+  PERCENT: 'percent',
+  SLIDER_DOUBLE: 'slider2',
   TAGS: 'tags',
 }
 FIELD.FOR = {
   FORM: [
+    {id: FIELD.ID.SLIDER_DOUBLE, required},
     {id: FIELD.ID.EMAIL, required},
     {id: FIELD.ID.PHONE, required},
     {id: FIELD.ID.MULTIPLE_DROPDOWN, required},
     {id: FIELD.ID.TAGS, required, info: 'Keywords to identify this entry'},
     {id: FIELD.ID.ABOUT, required},
+    {id: FIELD.ID.PERCENT},
     { // `required` can be passed down as group, leave undefined by default for customisation
       id: FIELD.ID.GROUP,
       items: [{id: FIELD.ID.FIRST_NAME}, {id: FIELD.ID.LAST_NAME}],
@@ -178,6 +191,18 @@ FIELD.FOR = {
   ]
 }
 FIELD.DEF = {
+  [FIELD.ID.SLIDER_DOUBLE]: {
+    name: 'slider2',
+    get label () {return _.SLIDER_DOUBLE},
+    step: 0.1,
+    min: -5,
+    max: 5, // use percent to avoid floating point issues like 0.5500000001
+    format: formatPercent,
+    parse: parsePercent,
+    render: (value) => value != null ? ips(_.value_PERCENT, {value}) : value,
+    // defaultValue: [-1.5, 1.5],
+    view: FIELD.TYPE.SLIDER,
+  },
   [FIELD.ID.FIRST_NAME]: {
     name: 'name',
     get label () {return _.FIRST_NAME},
@@ -197,6 +222,21 @@ FIELD.DEF = {
     type: 'textarea',
     get label () {return _.ABOUT},
     view: FIELD.TYPE.INPUT, // required definition
+  },
+
+  [FIELD.ID.PERCENT]: {
+    name: 'percent',
+    type: 'number',
+    unit: '%',
+    defaultValue: 1,
+    format (v) {
+      return v && +String(v * 100) // convert to string explicitly to trim leading zeros
+    },
+    parse (v) {
+      return v && round(v / 100, 3)
+    },
+    get label () {return _.PERCENT},
+    view: FIELD.TYPE.INPUT,
   },
 
   [FIELD.ID.FILE]: {
@@ -279,6 +319,16 @@ FIELD.DEF = {
     // options - to be loaded by component
     view: FIELD.TYPE.SELECT,
   },
+}
+
+/* Convert Fraction to Percent */
+export function formatPercent (v) {
+  return v && +(v * 100).toFixed(1) // convert to string explicitly to trim leading zeros, but not here for slider
+}
+
+/* Convert Percent to Fraction */
+export function parsePercent (v) {
+  return v && round(v / 100, 3)
 }
 
 function requiredBaseUpload (files) {
